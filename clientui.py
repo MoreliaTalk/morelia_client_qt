@@ -15,16 +15,18 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(479, 652)
-        MainWindow.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0.852, y2:0.863636, stop:0 rgba(179, 255, 254, 255), stop:1 rgba(255, 216, 246, 255));")
+        MainWindow.setStyleSheet("\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(187, 220, 255, 255), stop:1 rgba(150, 228, 240, 255));\n"
+"")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
         self.textEdit.setGeometry(QtCore.QRect(10, 530, 381, 81))
         self.textEdit.setObjectName("textEdit")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(30, 0, 391, 71))
+        self.label.setGeometry(QtCore.QRect(40, 0, 391, 71))
         self.label.setStyleSheet("background-color:  rgba(0, 255, 254, 0);\n"
-"font: 20pt \"Lucida Handwriting\";")
+"font: 8pt \"Comic Sans MS\";")
         self.label.setObjectName("label")
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser.setGeometry(QtCore.QRect(10, 70, 461, 451))
@@ -63,6 +65,6 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:24pt; font-weight:600; font-style:italic;\">Мессенжер</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:28pt; font-style:italic;\">MoreliaTalk</span></p></body></html>"))
         self.pushButton.setText(_translate("MainWindow", "Send"))
         self.checkBox.setText(_translate("MainWindow", "Тёмная тема"))

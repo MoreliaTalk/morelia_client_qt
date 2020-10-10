@@ -14,7 +14,9 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0.852, y2:0.863636, stop:0 rgba(179, 255, 254, 255), stop:1 rgba(255, 216, 246, 255));</string>
+   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(187, 220, 255, 255), stop:1 rgba(150, 228, 240, 255));
+
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="pushButton">
@@ -45,7 +47,7 @@
      <string>Войти</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="lineEdit_user">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -103,7 +105,7 @@
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если учетная запись с данным именем не будет обнаружена&lt;/p&gt;&lt;p&gt;она будет создана с указанным паролем&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="lineEdit_password">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -113,10 +115,11 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0.852, y2:0.863636, stop:0 rgb(179, 255, 254), stop:1 rgb(255, 216, 246));</string>
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(187, 220, 255, 255), stop:1 rgba(150, 228, 240, 255));
+</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="label_version">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -129,7 +132,7 @@
      <string notr="true">background-color: rgba(0, 0, 0, 0);</string>
     </property>
     <property name="text">
-     <string> </string>
+     <string/>
     </property>
    </widget>
   </widget>

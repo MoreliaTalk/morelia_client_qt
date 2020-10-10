@@ -11,11 +11,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
+class Ui_Messenger(object):
     def setupUi(self, Messenger):
         Messenger.setObjectName("Messenger")
         Messenger.resize(333, 322)
-        Messenger.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0.852, y2:0.863636, stop:0 rgba(179, 255, 254, 255), stop:1 rgba(255, 216, 246, 255));")
+        Messenger.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(187, 220, 255, 255), stop:1 rgba(150, 228, 240, 255));")
         self.centralwidget = QtWidgets.QWidget(Messenger)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
@@ -30,9 +30,9 @@ class Ui_MainWindow(object):
         self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton.setStyleSheet("font: 14pt \"MS Shell Dlg 2\";")
         self.pushButton.setObjectName("pushButton")
-        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit.setGeometry(QtCore.QRect(10, 40, 301, 41))
-        self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit_user = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_user.setGeometry(QtCore.QRect(10, 40, 301, 41))
+        self.lineEdit_user.setObjectName("lineEdit_user")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(10, 10, 161, 21))
         self.label.setStyleSheet("background-color: rgba(255, 255, 255, 0);")
@@ -45,14 +45,16 @@ class Ui_MainWindow(object):
         self.label_3.setGeometry(QtCore.QRect(10, 180, 311, 61))
         self.label_3.setStyleSheet("background-color: rgba(255, 255, 255, 0);")
         self.label_3.setObjectName("label_3")
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_2.setGeometry(QtCore.QRect(10, 140, 301, 41))
-        self.lineEdit_2.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0.852, y2:0.863636, stop:0 rgb(179, 255, 254), stop:1 rgb(255, 216, 246));")
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(290, 0, 41, 16))
-        self.label_4.setStyleSheet("background-color: rgba(0, 0, 0, 0);")
-        self.label_4.setObjectName("label_4")
+        self.lineEdit_password = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_password.setGeometry(QtCore.QRect(10, 140, 301, 41))
+        self.lineEdit_password.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(187, 220, 255, 255), stop:1 rgba(150, 228, 240, 255));\n"
+"")
+        self.lineEdit_password.setObjectName("lineEdit_password")
+        self.label_version = QtWidgets.QLabel(self.centralwidget)
+        self.label_version.setGeometry(QtCore.QRect(290, 0, 41, 16))
+        self.label_version.setStyleSheet("background-color: rgba(0, 0, 0, 0);")
+        self.label_version.setText("")
+        self.label_version.setObjectName("label_version")
         Messenger.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Messenger)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 333, 21))
@@ -72,4 +74,3 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("Messenger", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">Имя пользователя</span></p></body></html>"))
         self.label_2.setText(_translate("Messenger", "<html><head/><body><p><span style=\" font-size:12pt; font-weight:600;\">Пароль</span></p></body></html>"))
         self.label_3.setText(_translate("Messenger", "<html><head/><body><p>Если учетная запись с данным именем не будет обнаружена</p><p>она будет создана с указанным паролем</p></body></html>"))
-        self.label_4.setText(_translate("Messenger", " "))

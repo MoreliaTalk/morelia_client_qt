@@ -1,0 +1,16 @@
+QPushButton{
+    background-color: #121212;
+    border: none;
+}
+
+QPushButton#ExitButton:hover{
+    background-color: red;
+}
+
+QPushButton#MinimazeButton:hover, QPushButton#ResizeButton:hover{
+    background-color: #333333;
+}
+
+QMainWindow{
+    background-color: #121212;
+}

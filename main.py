@@ -25,13 +25,17 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow):
         
         self.ExitButton.clicked.connect(self.close)
         self.MinimazeButton.clicked.connect(self.showMinimized)
-        self.ResizeButton.clicked.connect(self.resize_window)
-
-    def resize_window(self):
-        self.showMaximized()
 
     def theme_change(self):
         pass
+
+    def mousePressEvent(self,event):
+        if event.button() == QtCore.Qt.LeftButton:
+            self.moving = True
+            self.offset = event.pos()
+
+    def mouseMoveEvent(self,event):
+        if self.moving: self.move(event.globalPos()-self.offset)
 
 app = QtWidgets.QApplication([])
 window = Main()

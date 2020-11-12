@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'D:/DJANGO-NIKITA/MoreliaTalk/morelia_client_qt/module/main_window.ui'
+# Form implementation generated from reading ui file 'D:\DJANGO-NIKITA\MoreliaTalk\morelia_client_qt\module\main_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -26,28 +26,29 @@ class Ui_MainWindow(object):
         self.ExitButton.setDefault(False)
         self.ExitButton.setFlat(False)
         self.ExitButton.setObjectName("ExitButton")
-        self.ResizeButton = QtWidgets.QPushButton(self.centralwidget)
-        self.ResizeButton.setEnabled(True)
-        self.ResizeButton.setGeometry(QtCore.QRect(360, 0, 45, 30))
-        self.ResizeButton.setAutoFillBackground(False)
-        self.ResizeButton.setText("")
-        self.ResizeButton.setAutoDefault(False)
-        self.ResizeButton.setDefault(False)
-        self.ResizeButton.setFlat(False)
-        self.ResizeButton.setObjectName("ResizeButton")
         self.MinimazeButton = QtWidgets.QPushButton(self.centralwidget)
         self.MinimazeButton.setEnabled(True)
-        self.MinimazeButton.setGeometry(QtCore.QRect(315, 0, 45, 30))
+        self.MinimazeButton.setGeometry(QtCore.QRect(360, 0, 45, 30))
         self.MinimazeButton.setAutoFillBackground(False)
         self.MinimazeButton.setText("")
         self.MinimazeButton.setAutoDefault(False)
         self.MinimazeButton.setDefault(False)
         self.MinimazeButton.setFlat(False)
         self.MinimazeButton.setObjectName("MinimazeButton")
+        self.LabelMT = QtWidgets.QLabel(self.centralwidget)
+        self.LabelMT.setGeometry(QtCore.QRect(120, 5, 210, 25))
+        font = QtGui.QFont()
+        font.setFamily("Ustroke")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setWeight(50)
+        self.LabelMT.setFont(font)
+        self.LabelMT.setObjectName("LabelMT")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        pass
+        _translate = QtCore.QCoreApplication.translate
+        self.LabelMT.setText(_translate("MainWindow", "MoreliaTalk"))

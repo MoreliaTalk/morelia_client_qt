@@ -7,10 +7,14 @@ QPushButton#ExitButton:hover{
     background-color: red;
 }
 
-QPushButton#MinimazeButton:hover, QPushButton#ResizeButton:hover{
+QPushButton#MinimazeButton:hover{
     background-color: #333333;
 }
 
 QMainWindow{
     background-color: #121212;
+}
+
+QLabel#LabelMT{
+    color: lime;
 }

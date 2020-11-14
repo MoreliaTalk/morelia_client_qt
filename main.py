@@ -1,10 +1,14 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from module.main_window import Ui_MainWindow
+import types
 
 class Main(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
-        super(Main, self).__init__()
+        super().__init__()
+
         self.setupUi(self)
+        self.moving = False
+        QtGui.QFontDatabase.addApplicationFont("font/Ustroke.ttf");
 
         self.theme = "dark"
         if self.theme:
@@ -25,17 +29,27 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow):
         
         self.ExitButton.clicked.connect(self.close)
         self.MinimazeButton.clicked.connect(self.showMinimized)
+        self.MinimazeButton.pressed.connect(self.ButtonPressedMovingFalse)
+        self.ExitButton.pressed.connect(self.ButtonPressedMovingFalse)
+
+
+    def ButtonPressedMovingFalse(self):
+        self.moving = False
+
+    def mousePressEvent(self, event):
+        if event.y() <= 30:
+            if event.button() == QtCore.Qt.LeftButton:
+                self.moving = True
+                self.offset = event.pos()
+        else:
+            self.moving = False
+
+    def mouseMoveEvent(self, event):
+        if self.moving:
+            self.move(event.globalPos()-self.offset)
 
     def theme_change(self):
         pass
-
-    def mousePressEvent(self,event):
-        if event.button() == QtCore.Qt.LeftButton:
-            self.moving = True
-            self.offset = event.pos()
-
-    def mouseMoveEvent(self,event):
-        if self.moving: self.move(event.globalPos()-self.offset)
 
 app = QtWidgets.QApplication([])
 window = Main()

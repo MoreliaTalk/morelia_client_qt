@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'D:\DJANGO-NIKITA\MoreliaTalk\morelia_client_qt\module\main_window.ui'
+# Form implementation generated from reading ui file 'module/main_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -17,7 +17,12 @@ class Ui_MainWindow(object):
         MainWindow.resize(450, 550)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.ExitButton = QtWidgets.QPushButton(self.centralwidget)
+        self.frame = QtWidgets.QFrame(self.centralwidget)
+        self.frame.setGeometry(QtCore.QRect(0, 0, 450, 30))
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.ExitButton = QtWidgets.QPushButton(self.frame)
         self.ExitButton.setEnabled(True)
         self.ExitButton.setGeometry(QtCore.QRect(405, 0, 45, 30))
         self.ExitButton.setAutoFillBackground(False)
@@ -26,7 +31,7 @@ class Ui_MainWindow(object):
         self.ExitButton.setDefault(False)
         self.ExitButton.setFlat(False)
         self.ExitButton.setObjectName("ExitButton")
-        self.MinimazeButton = QtWidgets.QPushButton(self.centralwidget)
+        self.MinimazeButton = QtWidgets.QPushButton(self.frame)
         self.MinimazeButton.setEnabled(True)
         self.MinimazeButton.setGeometry(QtCore.QRect(360, 0, 45, 30))
         self.MinimazeButton.setAutoFillBackground(False)
@@ -35,8 +40,8 @@ class Ui_MainWindow(object):
         self.MinimazeButton.setDefault(False)
         self.MinimazeButton.setFlat(False)
         self.MinimazeButton.setObjectName("MinimazeButton")
-        self.LabelMT = QtWidgets.QLabel(self.centralwidget)
-        self.LabelMT.setGeometry(QtCore.QRect(120, 5, 210, 25))
+        self.LabelMT = QtWidgets.QLabel(self.frame)
+        self.LabelMT.setGeometry(QtCore.QRect(120, 0, 210, 25))
         font = QtGui.QFont()
         font.setFamily("Ustroke")
         font.setPointSize(20)

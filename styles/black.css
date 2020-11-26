@@ -1,13 +1,13 @@
-QPushButton{
+#ExitButton, #MinimazeButton{
     background-color: #121212;
     border: none;
 }
 
-QPushButton#ExitButton:hover{
+#ExitButton:hover{
     background-color: red;
 }
 
-QPushButton#MinimazeButton:hover{
+#MinimazeButton:hover{
     background-color: #333333;
 }
 
@@ -15,6 +15,27 @@ QMainWindow{
     background-color: #121212;
 }
 
-QLabel#LabelMT{
+#LabelMT{
     color: lime;
+}
+
+#scrollAreaWidgetContents{
+    background-color:#121212;
+}
+#MessagePole{
+    border: none;
+}
+
+#MyMessage{
+    border-width: 50px;
+    border-image: url("svg/Mes_me.svg");
+    color:lime;
+}
+
+#MyMessageText{
+    color: rgb(255, 255, 255);
+}
+
+#MyMessageTime{
+    color: grey;
 }

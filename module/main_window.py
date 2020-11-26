@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'module/main_window.ui'
+# Form implementation generated from reading ui file 'main_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(450, 550)
+        MainWindow.resize(450, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.frame = QtWidgets.QFrame(self.centralwidget)
@@ -49,6 +49,20 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         self.LabelMT.setFont(font)
         self.LabelMT.setObjectName("LabelMT")
+        self.MessagePole = QtWidgets.QScrollArea(self.centralwidget)
+        self.MessagePole.setGeometry(QtCore.QRect(0, 30, 450, 500))
+        self.MessagePole.setWidgetResizable(True)
+        self.MessagePole.setObjectName("MessagePole")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 448, 498))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.MessagePole.setWidget(self.scrollAreaWidgetContents)
+        self.SendButton = QtWidgets.QPushButton(self.centralwidget)
+        self.SendButton.setGeometry(QtCore.QRect(360, 530, 90, 70))
+        self.SendButton.setObjectName("SendButton")
+        self.InputText = QtWidgets.QTextEdit(self.centralwidget)
+        self.InputText.setGeometry(QtCore.QRect(0, 530, 360, 70))
+        self.InputText.setObjectName("InputText")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -57,3 +71,4 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         self.LabelMT.setText(_translate("MainWindow", "MoreliaTalk"))
+        self.SendButton.setText(_translate("MainWindow", "PushButton"))

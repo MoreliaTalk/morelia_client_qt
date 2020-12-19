@@ -15,6 +15,10 @@ QMainWindow{
     background-color: #121212;
 }
 
+#frame{
+    border: none;
+}
+
 #LabelMT{
     color: lime;
 }
@@ -32,10 +36,46 @@ QMainWindow{
     color:lime;
 }
 
-#MyMessageText{
+#OUMessage{
+    border-width: 50px;
+    border-image: url("svg/Mes_other_user.svg");
+}
+
+#MessageText{
     color: rgb(255, 255, 255);
 }
 
-#MyMessageTime{
+#MessageTime{
     color: grey;
+}
+
+#SendButton{
+    border: none;
+    background-color: #121212;
+}
+
+#SendButton:hover{
+    background-color: #333333;
+}
+
+#InputText{
+    background-color: #121212;
+    color: white;
+    border: none;
+}
+
+QScrollBar{
+    background: transparent;
+    width: 10px;
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle{
+    border-radius: 5px;
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #ffff00, stop: 1.0 lime);
+}
+
+QScrollBar::add-line, QScrollBar::sub-line { 
+    height: 0px;
 }

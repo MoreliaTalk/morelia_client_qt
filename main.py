@@ -2,7 +2,8 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from module.main_window import Ui_MainWindow
 from module import message
 
-QtCore.QCoreApplication.addLibraryPath("./plugins");
+QtCore.QCoreApplication.addLibraryPath("./plugins")
+
 
 class Main(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):

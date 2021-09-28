@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 pyqt5 = "*"
+flake8 = "*"
 
 [dev-packages]
 

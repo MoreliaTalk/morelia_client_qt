@@ -1,0 +1,11 @@
+#CustomTitleBar{
+    background-color: #161616;
+}
+
+QPushButton#ExitButton{
+    border: none;
+}
+
+QPushButton#ExitButton:hover{
+    background-color: red;
+}

@@ -26,7 +26,8 @@ class MainWindow(Ui_MainWindow, QMainWindow):
     def eventFilter(self, object: QtCore.QObject, event: QtCore.QEvent):
         if object == self.CustomTitleBar:
             if isinstance(event, QtGui.QMouseEvent):
-                if event.type() == QtCore.QEvent.Type.MouseButtonPress and event.button() == QtCore.Qt.LeftButton:
+                if (event.type() == QtCore.QEvent.Type.MouseButtonPress and
+                        event.button() == QtCore.Qt.LeftButton):
                     self.windowHandle().startSystemMove()
 
         return super().eventFilter(object, event)

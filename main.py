@@ -14,6 +14,9 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.setupUi(self)
 
         self.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
+
+        self.window_resize_border = 3
+        self.installEventFilter(self)
         self.CustomTitleBar.installEventFilter(self)
 
         self.theme = "dark"
@@ -27,8 +30,32 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         if object == self.CustomTitleBar:
             if isinstance(event, QtGui.QMouseEvent):
                 if (event.type() == QtCore.QEvent.Type.MouseButtonPress and
-                        event.button() == QtCore.Qt.LeftButton):
+                        event.button() == QtCore.Qt.LeftButton and
+                        event.pos().y() > (self.window_resize_border) and
+                        event.pos().y() < (self.CustomTitleBar.height())):
                     self.windowHandle().startSystemMove()
+        elif object == self:
+            if isinstance(event, QtGui.QMouseEvent):
+                if (event.type() == QtCore.QEvent.Type.MouseButtonPress and
+                        event.button() == QtCore.Qt.LeftButton):
+                    if event.pos().x() <= self.window_resize_border:
+                        self.windowHandle().startSystemResize(QtCore.Qt.Edge.LeftEdge)
+                    elif (event.pos().x() - self.width()) >= -self.window_resize_border:
+                        self.windowHandle().startSystemResize(QtCore.Qt.Edge.RightEdge)
+                    elif event.pos().y() <= self.window_resize_border:
+                        self.windowHandle().startSystemResize(QtCore.Qt.Edge.TopEdge)
+                    elif (event.pos().y() - self.height()) >= -self.window_resize_border:
+                        self.windowHandle().startSystemResize(QtCore.Qt.Edge.BottomEdge)
+
+            elif isinstance(event, QtGui.QHoverEvent):
+                if (event.pos().x() <= self.window_resize_border or
+                        (event.pos().x() - self.width()) >= -self.window_resize_border):
+                    self.setCursor(QtCore.Qt.CursorShape.SizeHorCursor)
+                elif (event.pos().y() <= self.window_resize_border or
+                        (event.pos().y() - self.height()) >= -self.window_resize_border):
+                    self.setCursor(QtCore.Qt.CursorShape.SizeVerCursor)
+                else:
+                    self.setCursor(QtCore.Qt.CursorShape.ArrowCursor)
 
         return super().eventFilter(object, event)
 

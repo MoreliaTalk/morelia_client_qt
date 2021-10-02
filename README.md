@@ -1,1 +1,0 @@
-# MoreliaClientQT - десткопный клиент MoreliaTalk, написанный с использованием QT.

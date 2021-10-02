@@ -49,7 +49,8 @@ class MainWindow(Ui_MainWindow, QMainWindow):
                     if (event.pos().y() - self.height()) >= -self.window_resize_border:
                         edges |= QtCore.Qt.Edge.BottomEdge
 
-                    self.windowHandle().startSystemResize(edges)
+                    if edges:
+                        self.windowHandle().startSystemResize(edges)
 
             elif isinstance(event, QtGui.QHoverEvent):
                 if ((event.pos().x() <= self.window_resize_border and

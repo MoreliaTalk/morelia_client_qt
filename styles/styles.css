@@ -1,0 +1,5 @@
+QPushButton#SendButton{
+    background-color: --primary_color;
+    border: none;
+    border-radius: 10px;
+}

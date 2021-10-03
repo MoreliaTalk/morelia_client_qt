@@ -22,19 +22,19 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout" rowstretch="9,1" columnstretch="1,2">
     <property name="leftMargin">
-     <number>0</number>
+     <number>5</number>
     </property>
     <property name="topMargin">
-     <number>0</number>
+     <number>5</number>
     </property>
     <property name="rightMargin">
-     <number>0</number>
+     <number>5</number>
     </property>
     <property name="bottomMargin">
-     <number>0</number>
+     <number>5</number>
     </property>
     <property name="spacing">
-     <number>0</number>
+     <number>5</number>
     </property>
     <item row="1" column="1">
      <layout class="QHBoxLayout" name="InputArea" stretch="5,1">
@@ -42,16 +42,16 @@
        <number>5</number>
       </property>
       <property name="leftMargin">
-       <number>5</number>
+       <number>0</number>
       </property>
       <property name="topMargin">
-       <number>5</number>
+       <number>0</number>
       </property>
       <property name="rightMargin">
-       <number>5</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
-       <number>5</number>
+       <number>0</number>
       </property>
       <item>
        <widget class="QTextEdit" name="InputText">
@@ -106,8 +106,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>318</width>
-         <height>538</height>
+         <width>313</width>
+         <height>528</height>
         </rect>
        </property>
       </widget>
@@ -129,8 +129,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>638</width>
-         <height>484</height>
+         <width>628</width>
+         <height>471</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="MessageAreaCOntentLayout">

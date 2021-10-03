@@ -2,11 +2,27 @@ $primary_color: #00ff00;
 $secondary_color: #fde910;
 $background_color: #161616;
 
-QMainWindow{
+$invert_background_color: invert($background_color);
+
+QWidget{
     background-color: $background_color;
+}
+
+QMainWindow{
+
+    QScrollBar{
+        background: transparent;
+    }
+
+    QTextEdit#InputText{
+        border: 1.5px solid $primary_color;
+        border-radius: 10px;
+
+        color: $invert_background_color;
+    }
 
     QPushButton#SendButton{
-        background-color: $primary_color;
+        background-color: $secondary_color;
         border: none;
         border-radius: 10px;
 

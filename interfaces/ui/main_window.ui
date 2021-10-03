@@ -10,21 +10,164 @@
     <height>540</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>960</width>
-     <height>21</height>
-    </rect>
-   </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout" rowstretch="9,1" columnstretch="1,2">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="1" column="1">
+     <layout class="QHBoxLayout" name="InputArea" stretch="5,1">
+      <property name="spacing">
+       <number>5</number>
+      </property>
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <property name="rightMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
+       <number>5</number>
+      </property>
+      <item>
+       <widget class="QTextEdit" name="textEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>10</width>
+          <height>10</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="0" rowspan="2">
+     <widget class="QScrollArea" name="ChatListArea">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>318</width>
+         <height>538</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QScrollArea" name="MessageArea">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="MessageAreaContent">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>638</width>
+         <height>484</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="MessageAreaCOntentLayout">
+        <property name="leftMargin">
+         <number>5</number>
+        </property>
+        <property name="topMargin">
+         <number>5</number>
+        </property>
+        <property name="rightMargin">
+         <number>5</number>
+        </property>
+        <property name="bottomMargin">
+         <number>5</number>
+        </property>
+        <property name="spacing">
+         <number>5</number>
+        </property>
+        <item row="0" column="0" colspan="2">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

@@ -1,5 +1,8 @@
 import sys
 from os import path
+
+import sass
+
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from interfaces.main_window import Ui_MainWindow
 
@@ -10,19 +13,20 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
         self.setupUi(self)
 
+        """
         self.theme = "dark"
         self.theme_colors = dict()
-
         if self.theme == "dark":
             self.theme_colors["primary_color"] = "#00ff00"
             self.theme_colors["secondary_color"] = "#fde910"
             self.theme_colors["background_color"] = "#161616"
+        """
         
-        text_css = open(path.join("styles", "styles.css"), "r").read()
+        text_css = open(path.join("scss", "styles.scss"), "r").read()
 
-        text_css = text_css.replace("--primary_color", self.theme_colors["primary_color"])
-        text_css = text_css.replace("--secondary_color", self.theme_colors["secondary_color"])
-        text_css = text_css.replace("--background_color", self.theme_colors["background_color"])
+        text_css = sass.compile(string=text_css)
+
+        print(text_css)
 
         self.setStyleSheet(text_css)
 

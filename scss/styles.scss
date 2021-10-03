@@ -1,0 +1,17 @@
+$primary_color: #00ff00;
+$secondary_color: #fde910;
+$background_color: #161616;
+
+#MainWindow{
+    background-color: $background_color;
+
+    QPushButton#SendButton{
+        background-color: $primary_color;
+        border: none;
+        border-radius: 10px;
+
+        &:hover{
+            background-color: lighten($primary_color, 10%);
+        }
+    }
+}

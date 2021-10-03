@@ -2,7 +2,7 @@ $primary_color: #00ff00;
 $secondary_color: #fde910;
 $background_color: #161616;
 
-#MainWindow{
+QMainWindow{
     background-color: $background_color;
 
     QPushButton#SendButton{

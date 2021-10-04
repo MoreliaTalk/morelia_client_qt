@@ -12,6 +12,14 @@ QMainWindow{
 
     QScrollBar{
         background: transparent;
+        width: 15px;
+        margin: 0;
+        
+        &::add-line, &::sub-line, &::add-page, &::sub-page{
+            width: 10px;
+            height: 10px;
+            background: none;
+        }
     }
 
     QTextEdit#InputText{

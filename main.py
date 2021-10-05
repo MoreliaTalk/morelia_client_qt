@@ -3,7 +3,7 @@ from os import path
 
 import sass
 
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow
 from interfaces.main_window import Ui_MainWindow
 
 
@@ -29,6 +29,10 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         print(text_css)
 
         self.setStyleSheet(text_css)
+    
+    # TODO Сделать добавление сообщений в чат
+    # def add_message(self, text: str, time):
+        # self.MessageAreaContentLayout.addChildWidget()
 
 
 if __name__ == "__main__":

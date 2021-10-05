@@ -133,7 +133,7 @@
          <height>471</height>
         </rect>
        </property>
-       <layout class="QGridLayout" name="MessageAreaCOntentLayout">
+       <layout class="QGridLayout" name="MessageAreaContentLayout">
         <property name="leftMargin">
          <number>5</number>
         </property>

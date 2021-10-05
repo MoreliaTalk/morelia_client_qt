@@ -16,8 +16,8 @@ QMainWindow{
         margin: 0;
         
         &::add-line, &::sub-line, &::add-page, &::sub-page{
-            width: 10px;
-            height: 10px;
+            width: 0px;
+            height: 0px;
             background: none;
         }
     }

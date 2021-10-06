@@ -4,6 +4,22 @@ $background_color: #161616;
 
 $invert_background_color: invert($background_color);
 
+@mixin Message($type){
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    @if ($type == "my"){
+        background-color: $primary_color;
+
+        margin-left: auto;
+        margin-right: 0px;
+
+        border-bottom-right-radius: 5px;
+    }
+}
+
 QWidget{
     background-color: $background_color;
 }
@@ -17,10 +33,12 @@ QMainWindow{
     }
     */
 
+    QLabel#myMessage{
+        @include Message("my")
+    }
+    
     QScrollArea#MessageArea{
-        border: 1.5px solid $primary_color;
-        border-radius: 10px;
-        padding: 1.5px;
+        border: none;
     }
 
     QScrollBar{

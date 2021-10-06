@@ -6,17 +6,15 @@ $invert_background_color: invert($background_color);
 
 @mixin Message($type){
     padding: 10px;
-    border-radius: 10px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    border-radius: 20px;
+    margin: 0px;
 
     @if ($type == "my"){
         background-color: $primary_color;
-
-        margin-left: auto;
-        margin-right: 0px;
-
         border-bottom-right-radius: 5px;
+    } @else if ($type == "other_user"){
+        background-color: $secondary_color;
+        border-bottom-left-radius: 5px;
     }
 }
 
@@ -35,6 +33,10 @@ QMainWindow{
 
     QLabel#myMessage{
         @include Message("my")
+    }
+
+    QLabel#otherUserMessage{
+        @include Message("other_user")
     }
     
     QScrollArea#MessageArea{

@@ -32,7 +32,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
         self.setStyleSheet(text_css)
 
-        self.add_message("my", "1111")
+        self.add_message("other_user", "1111gggggggggggggggggggggggggg\nkkkkk")
     
     def add_message(self, type: str, text: str):
         new_message = MessageElement()

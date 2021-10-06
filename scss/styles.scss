@@ -6,7 +6,7 @@ $invert_background_color: invert($background_color);
 
 @mixin Message($type){
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 15px;
     margin: 0px;
 
     @if ($type == "my"){

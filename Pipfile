@@ -7,6 +7,7 @@ name = "pypi"
 pyqt5 = "*"
 libsass = "*"
 flake8 = "*"
+coverage = "*"
 
 [dev-packages]
 

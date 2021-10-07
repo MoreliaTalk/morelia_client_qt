@@ -31,8 +31,6 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         print(text_css)
 
         self.setStyleSheet(text_css)
-
-        self.add_message("my", "11111111111111111111111\n111111111111111111")
     
     def add_message(self, type: str, text: str):
         new_message = MessageElement()
@@ -50,6 +48,8 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
             self.MessageAreaContentLayout.addWidget(new_message)
             self.MessageAreaContentLayout.addWidget(QLabel())
+
+        return True
 
 
 if __name__ == "__main__":

@@ -5,14 +5,17 @@ from PyQt5.QtWidgets import QApplication
 import main
 
 
-class TestMainWindow(unittest.TestCase):
+class TestMessageController(unittest.TestCase):
     def setUp(self):
         self.app = QApplication(sys.argv)
         self.mainWindow = main.MainWindow()
         self.mainWindow.show()
-        
+
     def test_add_message(self):
-        self.assertTrue(self.mainWindow.MessageController.add_message(type="my", text="111111"))
+        self.assertEqual(self.mainWindow.MessageController.add_message(
+                            type="my", text="111111"
+                        ),
+                         self.mainWindow.MessageAreaContent.children()[-1])
         # sys.exit(self.app.exec_())
 
 

@@ -23,7 +23,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             self.theme_colors["secondary_color"] = "#fde910"
             self.theme_colors["background_color"] = "#161616"
         """
-        
+
         text_css = open(path.join("scss", "styles.scss"), "r").read()
         text_css = sass.compile(string=text_css)
         print(text_css)

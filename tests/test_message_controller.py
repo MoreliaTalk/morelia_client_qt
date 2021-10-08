@@ -5,11 +5,10 @@ from PyQt5.QtWidgets import QApplication
 import main
 
 
-class TestMessageController(unittest.TestCase):
+class TestAddMessage(unittest.TestCase):
     def setUp(self):
         self.app = QApplication(sys.argv)
         self.mainWindow = main.MainWindow()
-        self.mainWindow.show()
 
     def test_add_message(self):
         self.assertEqual(self.mainWindow.MessageController.add_message(

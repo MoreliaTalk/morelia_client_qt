@@ -14,22 +14,24 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         super().__init__()
 
         self.setupUi(self)
+        self.MessageController = MessageController(self.MessageAreaContentLayout)
 
-        """
-        self.theme = "dark"
-        self.theme_colors = dict()
-        if self.theme == "dark":
-            self.theme_colors["primary_color"] = "#00ff00"
-            self.theme_colors["secondary_color"] = "#fde910"
-            self.theme_colors["background_color"] = "#161616"
-        """
-
+    def setColorTheme(self, primary_color: str = "#00ff00",
+                      secondary_color: str = "#fde910",
+                      background_color: str = "#161616"):
         text_css = open(path.join("scss", "styles.scss"), "r").read()
+
+        if not (primary_color == "#00ff00" and
+                secondary_color == "#fde910" and
+                background_color == "#161616"):
+            text_css.replace("#00ff00", primary_color)
+            text_css.replace("#fde910", secondary_color)
+            text_css.replace("#161616", background_color)
+
         text_css = sass.compile(string=text_css)
-        print(text_css)
         self.setStyleSheet(text_css)
 
-        self.MessageController = MessageController(self.MessageAreaContentLayout)
+        return text_css
 
 
 if __name__ == "__main__":

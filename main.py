@@ -3,10 +3,10 @@ from os import path
 
 import sass
 
-from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QSizePolicy
+from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from interfaces.main_window import Ui_MainWindow
-from modules.MessageElement import MessageElement
+from modules.message_controller import MessageController
 
 
 class MainWindow(Ui_MainWindow, QMainWindow):
@@ -25,31 +25,11 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         """
         
         text_css = open(path.join("scss", "styles.scss"), "r").read()
-
         text_css = sass.compile(string=text_css)
-
         print(text_css)
-
         self.setStyleSheet(text_css)
-    
-    def add_message(self, type: str, text: str):
-        new_message = MessageElement()
-        new_message.setText(text)
-        new_message.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Minimum)
-        
-        if type == "my":
-            new_message.setObjectName("myMessage")
 
-            self.MessageAreaContentLayout.addWidget(QLabel())
-            self.MessageAreaContentLayout.addWidget(new_message)
-
-        elif type == "other_user":
-            new_message.setObjectName("otherUserMessage")
-
-            self.MessageAreaContentLayout.addWidget(new_message)
-            self.MessageAreaContentLayout.addWidget(QLabel())
-
-        return True
+        self.MessageController = MessageController(self.MessageAreaContentLayout)
 
 
 if __name__ == "__main__":

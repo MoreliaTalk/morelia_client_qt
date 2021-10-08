@@ -12,7 +12,8 @@ class TestMainWindow(unittest.TestCase):
         self.mainWindow.show()
         
     def test_add_message(self):
-        self.assertTrue(self.mainWindow.add_message(type="my", text="111111"))
+        self.assertTrue(self.mainWindow.MessageController.add_message(type="my", text="111111"))
+        # sys.exit(self.app.exec_())
 
 
 if __name__ == "__main__":

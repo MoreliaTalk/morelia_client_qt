@@ -1,11 +1,6 @@
 from PyQt5.QtWidgets import QLabel, QSizePolicy
 
 
-class MessageElement(QLabel):
-    def __init__(self):
-        super().__init__()
-
-
 class MessageController:
     def __init__(self, MessageAreaContentLayout):
         super().__init__()
@@ -13,7 +8,7 @@ class MessageController:
         self.MessageAreaContentLayout = MessageAreaContentLayout
 
     def add_message(self, type: str, text: str):
-        new_message = MessageElement()
+        new_message = QLabel()
         new_message.setText(text)
         new_message.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Minimum)
 
@@ -28,5 +23,8 @@ class MessageController:
 
             self.MessageAreaContentLayout.addWidget(new_message)
             self.MessageAreaContentLayout.addWidget(QLabel())
+
+        else:
+            return False
 
         return new_message

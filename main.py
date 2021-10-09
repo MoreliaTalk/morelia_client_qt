@@ -19,7 +19,10 @@ class MainWindow(Ui_MainWindow, QMainWindow):
     def setColorTheme(self, primary_color: str = "#00ff00",
                       secondary_color: str = "#fde910",
                       background_color: str = "#161616"):
-        text_css = open(path.join("scss", "styles.scss"), "r").read()
+
+        file = open(path.join("scss", "styles.scss"), "r")
+        text_css = file.read()
+        file.close()
 
         if not (primary_color == "#00ff00" and
                 secondary_color == "#fde910" and

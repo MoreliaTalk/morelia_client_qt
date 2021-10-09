@@ -14,6 +14,8 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         super().__init__()
 
         self.setupUi(self)
+        self.setColorTheme()
+
         self.MessageController = MessageController(self.MessageAreaContentLayout)
 
     def setColorTheme(self, primary_color: str = "#00ff00",
@@ -24,9 +26,9 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         text_css = file.read()
         file.close()
 
-        if not (primary_color == "#00ff00" and
-                secondary_color == "#fde910" and
-                background_color == "#161616"):
+        if not (primary_color == (default_args_value := self.setColorTheme.__defaults__)[0] and
+                secondary_color == default_args_value and
+                background_color == default_args_value):
             text_css.replace("#00ff00", primary_color)
             text_css.replace("#fde910", secondary_color)
             text_css.replace("#161616", background_color)

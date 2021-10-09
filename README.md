@@ -1,1 +1,1 @@
-# MoreliaClientQt - десткопный клиент MoreliaTalk, написанный с использованием Qt
+# MoreliaClientQt - десктопный клиент MoreliaTalk, написанный с использованием Qt

@@ -1,9 +1,8 @@
-import sys
 from os import path
 
 import sass
 
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QMainWindow
 
 from interfaces.main_window import Ui_MainWindow
 from modules.message_controller import MessageController
@@ -40,10 +39,3 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.setStyleSheet(text_css)
 
         return text_css
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec_())

@@ -14,25 +14,28 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         super().__init__()
 
         self.setupUi(self)
-        self.setColorTheme()
 
+        self.setColorTheme()
         self.MessageController = MessageController(self.MessageAreaContentLayout)
 
-    def setColorTheme(self, primary_color: str = "#00ff00",
-                      secondary_color: str = "#fde910",
-                      background_color: str = "#161616"):
+    def setColorTheme(self, primary_color: str = None,
+                      secondary_color: str = None,
+                      background_color: str = None):
 
         file = open(path.join("scss", "styles.scss"), "r")
         text_css = file.read()
         file.close()
 
-        if not (primary_color == (default_args_value := self.setColorTheme.__defaults__)[0] and
-                secondary_color == default_args_value and
-                background_color == default_args_value):
-            text_css.replace("#00ff00", primary_color)
-            text_css.replace("#fde910", secondary_color)
-            text_css.replace("#161616", background_color)
+        if primary_color:
+            text_css = text_css.replace("#00ff00", primary_color)
 
+        if secondary_color:
+            text_css = text_css.replace("#fde910", secondary_color)
+
+        if background_color:
+            text_css = text_css.replace("#161616", background_color)
+
+        print(text_css)
         text_css = sass.compile(string=text_css)
         self.setStyleSheet(text_css)
 

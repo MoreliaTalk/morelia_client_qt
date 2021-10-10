@@ -8,6 +8,7 @@ pyqt5 = "*"
 libsass = "*"
 flake8 = "*"
 coverage = "*"
+pydantic = {extras = ["email"], version = "*"}
 
 [dev-packages]
 

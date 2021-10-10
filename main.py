@@ -2,20 +2,24 @@ from os import path
 
 import sass
 
+from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow
 
 from interfaces.main_window import Ui_MainWindow
+from interfaces.contact_card import ContactCard
 from modules.message_controller import MessageController
 
 
-class MainWindow(Ui_MainWindow, QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setupUi(self)
+        self.ui = uic.loadUi(path.join("interfaces", "ui", "main_window.ui"), self)
 
         self.setColorTheme()
         self.MessageController = MessageController(self.MessageAreaContentLayout)
+        for _ in range(20):
+            self.ContactsContent.addWidget(ContactCard("Test Chat", "Last message in chat"))
 
     def setColorTheme(self, primary_color: str = None,
                       secondary_color: str = None,

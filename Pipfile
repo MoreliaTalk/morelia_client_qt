@@ -10,6 +10,7 @@ flake8 = "*"
 coverage = "*"
 pydantic = {extras = ["email"], version = "*"}
 websockets = "*"
+loguru = "*"
 
 [dev-packages]
 

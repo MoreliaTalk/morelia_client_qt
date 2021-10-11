@@ -10,7 +10,7 @@ from interfaces.contact_card import ContactCard
 from modules.message_controller import MessageController
 
 
-class MainWindow(QMainWindow):
+class MainWindow(Ui_MainWindow, QMainWindow):
     def __init__(self):
         super().__init__()
 

@@ -1,29 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ChatCard</class>
- <widget class="QWidget" name="ChatCard">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>400</width>
-    <height>300</height>
-   </rect>
-  </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
-  </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
+ <class>ContactCard</class>
+ <widget class="QWidget" name="ContactCard">
   <property name="autoFillBackground">
    <bool>true</bool>
-  </property>
-  <property name="styleSheet">
-   <string notr="true"/>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="leftMargin">
@@ -53,7 +33,7 @@
       </size>
      </property>
      <property name="text">
-      <string>AB</string>
+      <string></string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

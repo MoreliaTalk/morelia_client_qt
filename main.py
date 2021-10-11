@@ -19,7 +19,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.setColorTheme()
         self.MessageController = MessageController(self.MessageAreaContentLayout)
         self.ContactsContent.addWidget(ContactCard("Test Chat", "Last message in test chat", ""))
-        self.ContactsContent.addWidget(ContactCard("Павел Дуров", "Только попробуйте...", ""))
+        self.ContactsContent.addWidget(ContactCard("Павел Дуров", "Только попробуйте...", "durov.jpg"))
         self.ContactsContent.addWidget(ContactCard("Normal User", "I just registered", "user.png"))
         self.ContactsContent.addWidget(ContactCard("Megan Fox", "Want to look my boobs?", "girl.png"))
 

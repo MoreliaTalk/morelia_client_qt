@@ -19,7 +19,6 @@ class ContactCard(QtWidgets.QWidget):
                                               (sourcePixmap.height()-imgSize)/2,
                                               imgSize, imgSize)
             smallerPixmap = croppedPixmap.scaled(labelSize, labelSize, transformMode=Qt.SmoothTransformation)
-            self.ContactAvatar.radius = self.ContactAvatar.width()/2
             self.ContactAvatar.target = QPixmap(labelSize, labelSize)
             self.ContactAvatar.target.fill(Qt.transparent)
             painter = QPainter(self.ContactAvatar.target)
@@ -36,4 +35,5 @@ class ContactCard(QtWidgets.QWidget):
         else:
             namesWord = contactName.split(" ")
             self.ContactAvatar.setText(namesWord[0][0] + namesWord[1][0])
-            self.ContactAvatar.setStyleSheet(f"background-color: rgb({randrange(100)},{randrange(100)},{randrange(100)}); ")
+            self.ContactAvatar.setStyleSheet(
+                f"background-color: rgb({randrange(100)},{randrange(100)},{randrange(100)});")

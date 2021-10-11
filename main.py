@@ -21,7 +21,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.ContactsContent.addWidget(ContactCard("Test Chat", "Last message in test chat", ""))
         self.ContactsContent.addWidget(ContactCard("Павел Дуров", "Только попробуйте...", "durov.jpg"))
         self.ContactsContent.addWidget(ContactCard("Normal User", "I just registered", "user.png"))
-        self.ContactsContent.addWidget(ContactCard("Megan Fox", "Want to look my boobs?", "girl.png"))
+        self.ContactsContent.addWidget(ContactCard("Megan Fox", "Want to look my boobs?", "megan.jpg"))
 
     def setColorTheme(self, primary_color: str = None,
                       secondary_color: str = None,

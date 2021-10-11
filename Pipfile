@@ -9,6 +9,7 @@ libsass = "*"
 flake8 = "*"
 coverage = "*"
 pydantic = {extras = ["email"], version = "*"}
+websockets = "*"
 
 [dev-packages]
 

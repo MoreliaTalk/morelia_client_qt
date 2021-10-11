@@ -1,6 +1,7 @@
 import websockets
 from loguru import logger
 
+
 class ServerCom:
     def __init__(self):
         pass

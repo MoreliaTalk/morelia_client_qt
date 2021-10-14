@@ -5,6 +5,7 @@ import sass
 from PyQt5.QtWidgets import QMainWindow
 
 from interfaces.main_window import Ui_MainWindow
+from modules.chats_controller import ChatsController
 from modules.message_controller import MessageController
 
 
@@ -12,10 +13,12 @@ class MainWindow(Ui_MainWindow, QMainWindow):
     def __init__(self):
         super().__init__()
 
+        # For direct load .UI use: self.ui = uic.loadUi(path.join("interfaces", "ui", "main_window.ui"), self)
         self.setupUi(self)
 
         self.setColorTheme()
         self.MessageController = MessageController(self.MessageAreaContentLayout)
+        self.ChatsController = ChatsController(self.ContactsContent)
 
     def setColorTheme(self, primary_color: str = None,
                       secondary_color: str = None,

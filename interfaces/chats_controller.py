@@ -1,12 +1,11 @@
-from os import path
 import random
 
-from PIL import Image, ImageDraw, ImageOps
+from PIL import Image, ImageDraw
 from PIL.ImageQt import ImageQt
 
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QImage, QPixmap, QPainter, QPainterPath
+from PyQt5.QtGui import QImage, QPixmap
 
 from .raw_interfaces.contact_card import Ui_ContactCard
 
@@ -52,8 +51,6 @@ class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
                 f"background-color: { randomColor }"
             )
 
-
-
 class ChatsController:
     def __init__(self, ChatsContentLayout):
         super().__init__()
@@ -62,12 +59,3 @@ class ChatsController:
     def add_chat(self, chatName: str, lastMessageText: str, image: Image.Image = None):
         new_chat_item = ChatItem(chatName, lastMessageText, image)
         self.ChatsContentLayout.addWidget(new_chat_item)
-
-if __name__ == "__main__":
-    import sys
-    from PyQt5.QtWidgets import QApplication
-    app = QApplication(sys.argv)
-    widget = ChatItem("Nekrod", "Hello!")
-    # , QImage(100, 100, QImage.Format.Format_RGB16)
-    widget.show()
-    sys.exit(app.exec_())

@@ -1,9 +1,25 @@
 from os import path
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPixmap, QPainter, QPainterPath
+from PyQt5.QtGui import QImage, QPixmap, QPainter, QPainterPath
 from random import randrange
-from interfaces.contact_card import Ui_ContactCard
+from .raw_interfaces.contact_card import Ui_ContactCard
+
+
+class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
+    def __init__(self, chatName: str, lastMessageText: str, image: QImage = None):
+        super().__init__()
+
+        self.setupUi(self)
+
+        self.ChatNameLabel.setText(chatName)
+        self.ChatLastMessageLabel.setText(lastMessageText)
+
+        if image:
+            pass
+        else:
+            pass
+
 
 
 class ChatsController:
@@ -47,3 +63,13 @@ class ChatsController:
 
         self.ChatsContentLayout.addWidget(new_contact_card)
         return new_contact_card
+
+
+if __name__ == "__main__":
+    import sys
+    from PyQt5.QtWidgets import QApplication
+    app = QApplication(sys.argv)
+    widget = ChatItem("Nekrod", "Hello!")
+    # , QImage(100, 100, QImage.Format.Format_RGB16)
+    widget.show()
+    sys.exit(app.exec_())

@@ -4,9 +4,9 @@ import sass
 
 from PyQt5.QtWidgets import QMainWindow
 
-from interfaces.main_window import Ui_MainWindow
-from modules.chats_controller import ChatsController
-from modules.message_controller import MessageController
+from interfaces.raw_interfaces.main_window import Ui_MainWindow
+from interfaces.chats_controller import ChatsController
+from interfaces.message_controller import MessageController
 
 
 class MainWindow(Ui_MainWindow, QMainWindow):

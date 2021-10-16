@@ -15,14 +15,11 @@ class MainWindow(Ui_MainWindow, QMainWindow):
     def __init__(self):
         super().__init__()
 
-        # For direct load .UI use: self.ui = uic.loadUi(path.join("interfaces", "ui", "main_window.ui"), self)
         self.setupUi(self)
 
         self.setColorTheme()
         self.MessageController = MessageController(self.MessageAreaContentLayout)
         self.ChatsController = ChatsController(self.ContactsContent)
-
-        self.ChatsController.add_chat("Nekrod", "hello!", Image.open("./cat.jpg"))
 
     def setColorTheme(self, primary_color: str = None,
                       secondary_color: str = None,

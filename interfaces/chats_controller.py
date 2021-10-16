@@ -27,7 +27,7 @@ class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
             elif len(splitName) == 2:
                 self.ContactAvatar.setText(splitName[0][0]+splitName[1][0])
 
-            randomColor =  "#{:06x}".format(random.randint(0, 0xFFFFFF)) 
+            randomColor =  f"hsl( { random.randint(190, 360) }, 100%, 50% )"
             self.ContactAvatar.setStyleSheet(
                 f"background-color: { randomColor }"
             )
@@ -39,7 +39,11 @@ class ChatsController:
         super().__init__()
         self.ChatsContentLayout = ChatsContentLayout
 
-    def add_chat(self, contactName, lastMessageText, imgPath):
+    def add_chat(self, chatName: str, lastMessageText: str, image: QImage = None):
+        new_chat_item = ChatItem(chatName, lastMessageText, image)
+        self.ChatsContentLayout.addWidget(new_chat_item)
+
+"""        
         new_contact_card = QtWidgets.QWidget()
         ui = Ui_ContactCard()
         ui.setupUi(new_contact_card)
@@ -75,6 +79,7 @@ class ChatsController:
 
         self.ChatsContentLayout.addWidget(new_contact_card)
         return new_contact_card
+"""
 
 
 if __name__ == "__main__":

@@ -20,6 +20,8 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.MessageController = MessageController(self.MessageAreaContentLayout)
         self.ChatsController = ChatsController(self.ContactsContent)
 
+        self.ChatsController.add_chat("Nekrod", "hello!")
+
     def setColorTheme(self, primary_color: str = None,
                       secondary_color: str = None,
                       background_color: str = None):

@@ -2,6 +2,8 @@ from os import path
 
 import sass
 
+from PIL import Image
+
 from PyQt5.QtWidgets import QMainWindow
 
 from interfaces.raw_interfaces.main_window import Ui_MainWindow
@@ -20,7 +22,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.MessageController = MessageController(self.MessageAreaContentLayout)
         self.ChatsController = ChatsController(self.ContactsContent)
 
-        self.ChatsController.add_chat("Nekrod", "hello!")
+        self.ChatsController.add_chat("Nekrod", "hello!", Image.open("./cat.jpg"))
 
     def setColorTheme(self, primary_color: str = None,
                       secondary_color: str = None,

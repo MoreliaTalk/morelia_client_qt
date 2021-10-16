@@ -83,8 +83,7 @@ QMainWindow{
         }
     }
 
-    QLabel#ContactAvatar 
-    {
+    QLabel#ContactAvatar{
     	border-radius: 20px;
     	background-clip: border; 
     	color: $invert_background_color; 
@@ -92,13 +91,11 @@ QMainWindow{
         font-weight: bold;
     }                                      
 
-    QLabel#ChatLastMessageLabel 
-    {
+    QLabel#ChatLastMessageLabel{
         color: $invert_background_color;
     }                                      
 
-    QLabel#ChatNameLabel 
-    {
+    QLabel#ChatNameLabel{
         color: $invert_background_color;
         font-weight: bold;
     }
@@ -108,7 +105,4 @@ QMainWindow{
         border-radius: 10px;
         padding: 1.5px;
     }
-
-
-
 }    

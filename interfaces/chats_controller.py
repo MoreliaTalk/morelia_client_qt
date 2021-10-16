@@ -1,6 +1,9 @@
 from os import path
 import random
 
+from PIL.Image import Image
+from PIL.ImageQt import ImageQt
+
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPixmap, QPainter, QPainterPath
@@ -9,7 +12,7 @@ from .raw_interfaces.contact_card import Ui_ContactCard
 
 
 class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
-    def __init__(self, chatName: str, lastMessageText: str, image: QImage = None):
+    def __init__(self, chatName: str, lastMessageText: str, image: Image = None):
         super().__init__()
 
         self.setupUi(self)
@@ -18,7 +21,17 @@ class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
         self.ChatLastMessageLabel.setText(lastMessageText)
 
         if image:
-            pass
+            image_result = image.convert("RGBA")
+            image_result = image_result.resize(
+                [
+                    self.ContactAvatar.width(),
+                    self.ContactAvatar.height()
+                ]
+            )
+
+            image_result_qt = ImageQt(image_result)
+
+            self.ContactAvatar.setPixmap(QPixmap(QImage(image_result_qt)))
         else:
             splitName = chatName.split()
 
@@ -39,7 +52,7 @@ class ChatsController:
         super().__init__()
         self.ChatsContentLayout = ChatsContentLayout
 
-    def add_chat(self, chatName: str, lastMessageText: str, image: QImage = None):
+    def add_chat(self, chatName: str, lastMessageText: str, image: Image = None):
         new_chat_item = ChatItem(chatName, lastMessageText, image)
         self.ChatsContentLayout.addWidget(new_chat_item)
 

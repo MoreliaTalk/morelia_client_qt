@@ -11,6 +11,7 @@ coverage = "*"
 pydantic = {extras = ["email"], version = "*"}
 websockets = "*"
 loguru = "*"
+pillow = "*"
 
 [dev-packages]
 

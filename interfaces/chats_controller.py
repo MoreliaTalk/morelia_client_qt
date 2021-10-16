@@ -1,7 +1,7 @@
 from os import path
 import random
 
-from PIL.Image import Image
+from PIL import Image, ImageDraw, ImageOps
 from PIL.ImageQt import ImageQt
 
 from PyQt5 import QtWidgets
@@ -12,7 +12,7 @@ from .raw_interfaces.contact_card import Ui_ContactCard
 
 
 class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
-    def __init__(self, chatName: str, lastMessageText: str, image: Image = None):
+    def __init__(self, chatName: str, lastMessageText: str, image: Image.Image = None):
         super().__init__()
 
         self.setupUi(self)
@@ -28,6 +28,13 @@ class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
                     self.ContactAvatar.height()
                 ]
             )
+
+            big_size = (image_result.size[0]*3, image_result.size[0]*3)
+            mask = Image.new("L", big_size)
+            draw = ImageDraw.Draw(mask)
+            draw.ellipse((0, 0) + big_size, fill=255)
+            mask = mask.resize(image_result.size, Image.ANTIALIAS)
+            image_result.putalpha(mask)
 
             image_result_qt = ImageQt(image_result)
 
@@ -52,7 +59,7 @@ class ChatsController:
         super().__init__()
         self.ChatsContentLayout = ChatsContentLayout
 
-    def add_chat(self, chatName: str, lastMessageText: str, image: Image = None):
+    def add_chat(self, chatName: str, lastMessageText: str, image: Image.Image = None):
         new_chat_item = ChatItem(chatName, lastMessageText, image)
         self.ChatsContentLayout.addWidget(new_chat_item)
 

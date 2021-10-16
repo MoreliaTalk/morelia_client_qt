@@ -2,8 +2,6 @@ from os import path
 
 import sass
 
-from PIL import Image
-
 from PyQt5.QtWidgets import QMainWindow
 
 from interfaces.raw_interfaces.main_window import Ui_MainWindow

@@ -40,11 +40,15 @@ class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
             self.ContactAvatar.setPixmap(QPixmap(QImage(image_result_qt)))
         else:
             splitName = chatName.split()
+            name_initials = str()
 
             if len(splitName) == 1:
-                self.ContactAvatar.setText(splitName[0][0]+splitName[0][1])
-            elif len(splitName) == 2:
-                self.ContactAvatar.setText(splitName[0][0]+splitName[1][0])
+                name_initials = splitName[0][0]+splitName[0][1]
+            elif len(splitName) >= 2:
+                for i in splitName:
+                    name_initials += i[0]
+
+            self.ContactAvatar.setText(name_initials)
 
             randomColor =  f"hsl( { random.randint(190, 360) }, 100%, 50% )"
             self.ContactAvatar.setStyleSheet(

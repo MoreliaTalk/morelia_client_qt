@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\DJANGO-NIKITA\MoreliaTalk\morelia_client_qt\interfaces\raw_interfaces\ui\contact_card.ui'
+# Form implementation generated from reading ui file './ui/contact_card.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #

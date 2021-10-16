@@ -1,8 +1,10 @@
 from os import path
+import random
+
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPixmap, QPainter, QPainterPath
-from random import randrange
+
 from .raw_interfaces.contact_card import Ui_ContactCard
 
 
@@ -18,7 +20,17 @@ class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
         if image:
             pass
         else:
-            pass
+            splitName = chatName.split()
+
+            if len(splitName) == 1:
+                self.ContactAvatar.setText(splitName[0][0]+splitName[0][1])
+            elif len(splitName) == 2:
+                self.ContactAvatar.setText(splitName[0][0]+splitName[1][0])
+
+            randomColor =  "#{:06x}".format(random.randint(0, 0xFFFFFF)) 
+            self.ContactAvatar.setStyleSheet(
+                f"background-color: { randomColor }"
+            )
 
 
 

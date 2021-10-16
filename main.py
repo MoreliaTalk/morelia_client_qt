@@ -38,7 +38,6 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         if background_color:
             text_css = text_css.replace("#161616", background_color)
 
-        print(text_css)
         text_css = sass.compile(string=text_css)
         self.setStyleSheet(text_css)
 

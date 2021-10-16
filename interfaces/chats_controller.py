@@ -52,10 +52,12 @@ class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
             )
 
 class ChatsController:
-    def __init__(self, ChatsContentLayout):
+    def __init__(self, ChatsContentLayout: QtWidgets.QLayout):
         super().__init__()
         self.ChatsContentLayout = ChatsContentLayout
+        self.list_chats: list[ChatItem] = list()
 
     def add_chat(self, chatName: str, lastMessageText: str, image: Image.Image = None):
         new_chat_item = ChatItem(chatName, lastMessageText, image)
+        self.list_chats.append(new_chat_item)
         self.ChatsContentLayout.addWidget(new_chat_item)

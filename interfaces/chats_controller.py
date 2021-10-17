@@ -4,7 +4,6 @@ from PIL import Image, ImageDraw
 from PIL.ImageQt import ImageQt
 
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPixmap
 
 from .raw.contact_card import Ui_ContactCard
@@ -41,7 +40,7 @@ class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
         else:
             splitName = chatName.split()
             name_initials = str()
-            
+
             if len(splitName) == 0:
                 name_initials = "N_I"
             elif len(splitName) == 1:
@@ -52,10 +51,11 @@ class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
 
             self.ContactAvatar.setText(name_initials)
 
-            randomColor =  f"hsl( { random.randint(190, 360) }, 100%, 50% )"
+            randomColor = f"hsl( { random.randint(190, 360) }, 100%, 50% )"
             self.ContactAvatar.setStyleSheet(
                 f"background-color: { randomColor }"
             )
+
 
 class ChatsController:
     def __init__(self, ChatsContentLayout: QtWidgets.QLayout):

@@ -44,7 +44,7 @@ class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
             if len(splitName) == 0:
                 name_initials = "o_O"
             elif len(splitName) == 1:
-                name_initials = splitName[0][0]+splitName[0][1]
+                name_initials = splitName[0][0:2]
             elif len(splitName) >= 2:
                 for i in splitName:
                     name_initials += i[0]

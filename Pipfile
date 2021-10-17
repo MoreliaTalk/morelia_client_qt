@@ -4,15 +4,17 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pyqt5 = "*"
-libsass = "*"
-flake8 = "*"
-coverage = "*"
-pydantic = {extras = ["email"], version = "*"}
-websockets = "*"
-loguru = "*"
+pyqt5 = "==5.15.4"
+libsass = "==0.21.0"
+pydantic = "==1.8.2"
+email-validator = "==1.1.3"
+websockets = "==10.0"
+loguru = "==0.5.3"
+pillow = "==8.4.0"
 
 [dev-packages]
+flake8 = "==4.0.1"
+coverage = "==6.0.2"
 
 [requires]
 python_version = "3.9"

@@ -59,7 +59,6 @@ class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
 
 class ChatsController:
     def __init__(self, ChatsContentLayout: QtWidgets.QLayout):
-        super().__init__()
         self.ChatsContentLayout = ChatsContentLayout
         self.list_chats: list[ChatItem] = list()
 

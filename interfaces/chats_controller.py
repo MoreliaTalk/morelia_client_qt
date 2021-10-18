@@ -67,4 +67,4 @@ class ChatsController:
         new_chat_item = ChatItem(chatName, lastMessageText, image)
         self.list_chats.append(new_chat_item)
         self.ChatsContentLayout.addWidget(new_chat_item)
-        logger.info("add new chat " + new_chat_item)
+        logger.info(f"add new chat(chatName {chatName}, lastMessageText: {lastMessageText})")

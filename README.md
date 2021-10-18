@@ -29,9 +29,7 @@
 
 ### Клонирование репозитория на локальный компьютер
 
-Если ты не включен в команду на GitHub'е проекта, то необходимо сначала форкнуть к себе репозиторий MoreliaClientQt перейдя по [ссылке](https://github.com/MoreliaTalk/morelia_client_qt/fork).
-
-Клонировать репозиторий к себе на локальный компьютер используя командную строку и `git`
+Если ты не включен в команду на GitHub'е проекта, то необходимо сначала форкнуть к себе репозиторий MoreliaClientQt перейдя по [ссылке](https://github.com/MoreliaTalk/morelia_client_qt/fork). Затем нужно клонировать репозиторий к себе на локальный компьютер используя командную строку и `git`
 
 ```cmd
 git clone https://github.com/{username}/morelia_client_qt.git
@@ -41,6 +39,22 @@ git clone https://github.com/{username}/morelia_client_qt.git
 
 ```cmd
 git checkout develop
+```
+
+Синхронизируем свой форк с оригинальным репозиторием `upstream` MoreliaClientQt
+
+```
+git remote add upstream https://github.com/MoreliaTalk/morelia_client_qt.git
+```
+
+Проверяем появились ли репозиторий `upstream` в списке удалённых репозиториев
+
+```cmd
+git remote -v
+> origin    https://github.com/{username}/morelia_client_qt.git (fetch)
+> origin    https://github.com/{username}/morelia_client_qt.git (push)
+> upstream  https://github.com/MoreliaTalk/morelia_client_qt.git (fetch)
+> upstream  https://github.com/MoreliaTalk/morelia_client_qt.git (push)
 ```
 
 При использовании `GitHub Desktop` выбрать в меню `File` пункт `Clone repository...` далее следовать инструкциям

@@ -53,9 +53,9 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
         if custom_theme:
             logger.info("set custom color theme")
-            logger.info(f"primary color: { primary_color }")
-            logger.info(f"secondary color: { secondary_color }")
-            logger.info(f"background color: { background_color }")
+            logger.info(f"primary color: {primary_color}")
+            logger.info(f"secondary color: {secondary_color}")
+            logger.info(f"background color: {background_color}")
         else:
             logger.info("set standart color theme")
 

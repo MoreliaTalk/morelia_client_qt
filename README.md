@@ -39,7 +39,7 @@ git clone https://github.com/{username}/morelia_client_qt.git
 
 Переключаемся на ветку develop
 
-```
+```cmd
 git checkout develop
 ```
 

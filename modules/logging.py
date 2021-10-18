@@ -27,5 +27,7 @@ def set_logger_setting():
         ])),
         level="ERROR",
         colorize=False,
-        enqueue=True
+        enqueue=True,
+        rotation="10 MB",
+        compression="zip"
     )

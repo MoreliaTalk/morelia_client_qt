@@ -5,6 +5,7 @@ from PIL.ImageQt import ImageQt
 
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QImage, QPixmap
+from loguru import logger
 
 from .raw.contact_card import Ui_ContactCard
 
@@ -66,3 +67,4 @@ class ChatsController:
         new_chat_item = ChatItem(chatName, lastMessageText, image)
         self.list_chats.append(new_chat_item)
         self.ChatsContentLayout.addWidget(new_chat_item)
+        logger.info(f"add new chat(chatName {chatName}, lastMessageText: {lastMessageText})")

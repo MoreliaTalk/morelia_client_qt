@@ -33,7 +33,7 @@
 
 Клонировать репозиторий к себе на локальный компьютер используя командную строку и `git`
 
-```
+```cmd
 git clone https://github.com/{username}/morelia_client_qt.git
 ```
 

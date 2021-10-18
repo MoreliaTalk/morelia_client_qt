@@ -7,11 +7,11 @@ def set_logger_setting():
 
     logger.add(
         sys.stdout,
-        format=(str().join([
+        format=("".join((
             "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green>",
             " | <lvl>{level}</lvl> | ",
             "<cyan>{message}</cyan>"
-        ])),
+        ))),
         level="INFO",
         colorize=True,
         enqueue=True
@@ -19,12 +19,12 @@ def set_logger_setting():
 
     logger.add(
         "./log/errors.log",
-        format=(str().join([
+        format=("".join((
             "{time:YYYY-MM-DD HH:mm:ss.SSS}",
             " | {level} | ",
             "{file} (function: {function}, line: {line}) | ",
             "{message}"
-        ])),
+        ))),
         level="ERROR",
         colorize=False,
         enqueue=True,

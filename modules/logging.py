@@ -8,8 +8,8 @@ def set_logger_setting():
     logger.add(
         sys.stdout,
         format=(str().join([
-            "<lvl>{level}</lvl>",
-            " | <green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | ",
+            "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green>",
+            " | <lvl>{level}</lvl> | ",
             "<cyan>{message}</cyan>"
         ])),
         level="INFO",
@@ -20,8 +20,8 @@ def set_logger_setting():
     logger.add(
         "./log/errors.log",
         format=(str().join([
-            "{level}",
-            " | {time:YYYY-MM-DD HH:mm:ss.SSS} | ",
+            "{time:YYYY-MM-DD HH:mm:ss.SSS}",
+            " | {level} | ",
             "{file} (function: {function}, line: {line}) | ",
             "{message}"
         ])),

@@ -45,17 +45,14 @@ class ClientDb:
     @staticmethod
     def add_user(uuid, username, email=""):
         try:
-            models.UserConfig(uuid=uuid,
-                              username=username,
-                              email=email)
+            models.UserConfig(uuid=uuid, username=username, email=email)
         except orm.dberrors.OperationalError as error:
             print(f'Failed to add user. Error text: {error}')
 
     @staticmethod
     def add_flow(uuid, title):
         try:
-            models.Flow(uuid=uuid,
-                              title=title)
+            models.Flow(uuid=uuid, title=title)
         except orm.dberrors.OperationalError as error:
             print(f'Failed to add flow. Error text: {error}')
 
@@ -97,19 +94,39 @@ class ClientDb:
 
     @staticmethod
     def get_user_id_by_uuid(user_uuid):
-        return models.UserConfig.selectBy(uuid=user_uuid).getOne().id
+        try:
+            return models.UserConfig.selectBy(uuid=user_uuid).getOne().id
+        except orm.main.SQLObjectNotFound:
+            return None
+        except orm.dberrors.OperationalError:
+            return None
 
     @staticmethod
     def get_user_uuid_by_id(user_id):
-        return models.UserConfig.selectBy(id=user_id).getOne().uuid
+        try:
+            return models.UserConfig.selectBy(id=user_id).getOne().uuid
+        except orm.main.SQLObjectNotFound:
+            return None
+        except orm.dberrors.OperationalError:
+            return None
 
     @staticmethod
     def get_flow_id_by_uuid(flow_uuid):
-        return models.Flow.selectBy(uuid=flow_uuid).getOne().id
+        try:
+            return models.Flow.selectBy(uuid=flow_uuid).getOne().id
+        except orm.main.SQLObjectNotFound:
+            return None
+        except orm.dberrors.OperationalError:
+            return None
 
     @staticmethod
     def get_flow_uuid_by_id(flow_id):
-        return models.Flow.selectBy(id=flow_id).getOne().uuid
+        try:
+            return models.Flow.selectBy(id=flow_id).getOne().uuid
+        except orm.main.SQLObjectNotFound:
+            return None
+        except orm.dberrors.OperationalError:
+            return None
 
     @staticmethod
     def get_param(param, defaultValue=""):

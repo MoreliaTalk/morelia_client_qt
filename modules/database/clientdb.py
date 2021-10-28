@@ -115,11 +115,11 @@ class ClientDb:
             second_query = models.Message.selectBy(flow=flow.id).orderBy("-time")
             if second_query.count():
                 list_flow.append(FlowTuple(flow.id, flow.uuid, flow.title,
-                                      second_query[0].text, second_query[0].time,
-                                      second_query.count()))
+                                 second_query[0].text, second_query[0].time,
+                                 second_query.count()))
             else:
                 list_flow.append(FlowTuple(flow.id, flow.uuid, flow.title,
-                                      "", 0, 0))
+                                 "", 0, 0))
         for line in sorted(list_flow, key=attrgetter('last_time'), reverse=True):
             yield line
 

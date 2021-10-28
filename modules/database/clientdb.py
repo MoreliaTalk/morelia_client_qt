@@ -76,7 +76,32 @@ class ClientDb:
                            editedTime=edited_time,
                            editedStatus=edited_status)
         except orm.dberrors.OperationalError as error:
-            print(f'Failed to add flow. Error text: {error}')
+            print(f'Failed to add message. Error text: {error}')
+
+    @staticmethod
+    def update_message(uuid, text=None,
+                       file_picture=None, file_video=None, file_audio=None,
+                       file_document=None, emoji=None, edited_time=None, edited_status=None):
+        try:
+            db_query = models.Message.selectBy(uuid=uuid).getOne()
+            if text:
+                db_query.text = text
+            if file_picture:
+                db_query.filePicture = file_picture
+            if file_video:
+                db_query.fileVideo = file_video
+            if file_audio:
+                db_query.fileAudio = file_audio
+            if file_document:
+                db_query.fileDocument = file_document
+            if emoji:
+                db_query.emoji = emoji
+            if edited_time:
+                db_query.editedTime = edited_time
+            if edited_status:
+                db_query.editedStatus = edited_status
+        except orm.dberrors.OperationalError as error:
+            print(f'Failed to update message. Error text: {error}')
 
     @staticmethod
     def list_flow():

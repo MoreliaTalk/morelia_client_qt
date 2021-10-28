@@ -8,8 +8,7 @@ import sqlite3
 class TestClientDb(TestCase):
     @classmethod
     def setUpClass(cls):
-        self.client_db = clientdb.ClientDb("sqlite:/:memory:")
-        pass
+        cls.client_db = clientdb.ClientDb("sqlite:/:memory:")
 
     def setUp(self):
         self.client_db.create_db()
@@ -71,6 +70,20 @@ class TestClientDb(TestCase):
     def test_get_user_id_by_uuid(self):
         self.assertIsNotNone(self.client_db.get_user_id_by_uuid("uuu2"))
         self.assertIsNone(self.client_db.get_user_id_by_uuid("uuu3"))
+
+    def test_get_user(self):
+        self.assertIsNone(self.client_db.get_user())
+        self.assertIsNotNone(self.client_db.get_user(user_uuid="uuu2"))
+        self.assertIsNone(self.client_db.get_user(user_uuid="uuu3"))
+        self.assertIsNotNone(self.client_db.get_user(
+            user_id=self.client_db.get_user_id_by_uuid("uuu2")))
+
+    def test_get_flow(self):
+        self.assertIsNone(self.client_db.get_flow())
+        self.assertIsNotNone(self.client_db.get_flow(flow_uuid="fff3"))
+        self.assertIsNone(self.client_db.get_flow(flow_uuid="fff4"))
+        self.assertIsNotNone(self.client_db.get_flow(
+            flow_id=self.client_db.get_flow_id_by_uuid("fff3")))
 
     def test_get_user_uuid_by_id(self):
         self.assertEqual(self.client_db.get_user_id_by_uuid("uuu1"), 1)

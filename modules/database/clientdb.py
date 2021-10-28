@@ -43,16 +43,18 @@ class ClientDb:
             class_.dropTable(ifExists=True, dropJoinTables=True, cascade=True)
 
     @staticmethod
-    def add_user(uuid, username, email=""):
+    def add_user(uuid, username, email="", avatar=None, bio=None, is_bot=None):
         try:
-            models.UserConfig(uuid=uuid, username=username, email=email)
+            models.UserConfig(uuid=uuid, username=username, email=email,
+                              avatar=avatar, bio=bio, isBot=is_bot)
         except orm.dberrors.OperationalError as error:
             print(f'Failed to add user. Error text: {error}')
 
     @staticmethod
-    def add_flow(uuid, title):
+    def add_flow(uuid, title, time_created=None, flow_type=None, info=None, owner=None):
         try:
-            models.Flow(uuid=uuid, title=title)
+            models.Flow(uuid=uuid, title=title, timeCreated=time_created,
+                        flowType=flow_type, info=info, owner=owner)
         except orm.dberrors.OperationalError as error:
             print(f'Failed to add flow. Error text: {error}')
 
@@ -123,6 +125,38 @@ class ClientDb:
     def get_flow_uuid_by_id(flow_id):
         try:
             return models.Flow.selectBy(id=flow_id).getOne().uuid
+        except orm.main.SQLObjectNotFound:
+            return None
+        except orm.dberrors.OperationalError:
+            return None
+
+    @staticmethod
+    def get_user(user_uuid=None, user_id=None):
+        try:
+            if user_id and user_uuid:
+                return models.UserConfig.selectBy(uuid=user_uuid, id=user_id).getOne()
+            elif user_id:
+                return models.UserConfig.selectBy(id=user_id).getOne()
+            elif user_uuid:
+                return models.UserConfig.selectBy(uuid=user_uuid).getOne()
+            else:
+                return None
+        except orm.main.SQLObjectNotFound:
+            return None
+        except orm.dberrors.OperationalError:
+            return None
+
+    @staticmethod
+    def get_flow(flow_uuid=None, flow_id=None):
+        try:
+            if flow_id and flow_uuid:
+                return models.Flow.selectBy(uuid=flow_uuid, id=flow_id).getOne()
+            elif flow_id:
+                return models.Flow.selectBy(id=flow_id).getOne()
+            elif flow_uuid:
+                return models.Flow.selectBy(uuid=flow_uuid).getOne()
+            else:
+                return None
         except orm.main.SQLObjectNotFound:
             return None
         except orm.dberrors.OperationalError:

@@ -1,6 +1,7 @@
 import sys
 import inspect
-from operator import itemgetter
+from collections import namedtuple
+from operator import attrgetter
 from loguru import logger
 
 import sqlobject as orm
@@ -107,27 +108,27 @@ class ClientDb:
     @staticmethod
     def list_flow():
         list_flow = []
+        Flow = namedtuple('Flow', 'id uuid title last_message last_time count')
         db_query = models.Flow.selectBy()
         for flow in db_query:
             second_query = models.Message.selectBy(flow=flow.id).orderBy("-time")
             if second_query.count():
-                list_flow.append({'id': flow.id, 'uuid': flow.uuid, 'title': flow.title,
-                                  'last_message': second_query[0].text,
-                                  'last_time': second_query[0].time,
-                                  'count': second_query.count()})
+                list_flow.append(Flow(flow.id, flow.uuid, flow.title,
+                                      second_query[0].text, second_query[0].time,
+                                      second_query.count()))
             else:
-                list_flow.append({'id': flow.id, 'uuid': flow.uuid, 'title': flow.title,
-                                  'last_message': "", 'last_time': 0, 'count': 0})
-        for line in sorted(list_flow, key=itemgetter('last_time'), reverse=True):
+                list_flow.append(Flow(flow.id, flow.uuid, flow.title,
+                                      "", 0, 0))
+        for line in sorted(list_flow, key=attrgetter('last_time'), reverse=True):
             yield line
 
     @staticmethod
     def list_messages(flow_id):
+        Message = namedtuple('Message', 'id uuid text time user_id user_uuid username')
         db_query = models.Message.selectBy(flow=flow_id).orderBy("-time")
         for line in db_query:
             user = models.UserConfig.selectBy(id=line.user).getOne()
-            yield {'id': line.id, 'uuid': line.uuid, 'text': line.text, 'time': line.time,
-                   'userid': user.id, 'user_uuid': user.uuid, 'username': user.username}
+            yield Message(line.id, line.uuid, line.text, line.time, user.id, user.uuid, user.username)
 
     @staticmethod
     def get_user_id_by_uuid(user_uuid):

@@ -65,23 +65,23 @@ class TestClientDb(TestCase):
     def test_update_message(self):
         flow1 = self.client_db.get_flow_id_by_uuid("fff1")
         message = list(self.client_db.list_messages(flow1))[0]
-        old_flow1_message = message.get('text')
+        old_flow1_message = message.text
         flow3 = self.client_db.get_flow_id_by_uuid("fff3")
         message = list(self.client_db.list_messages(flow3))[0]
-        self.assertEqual(message.get('text'), 'Message 3 in chat3 from user2')
+        self.assertEqual(message.text, 'Message 3 in chat3 from user2')
 
-        self.client_db.update_message(message.get('uuid'), text='Edited text')
-
-        message = list(self.client_db.list_messages(flow3))[0]
-        self.assertEqual(message.get('text'), 'Edited text')
-
-        self.client_db.update_message(message.get('uuid'), edited_status=True)
+        self.client_db.update_message(message.uuid, text='Edited text')
 
         message = list(self.client_db.list_messages(flow3))[0]
-        self.assertEqual(message.get('text'), 'Edited text')
+        self.assertEqual(message.text, 'Edited text')
+
+        self.client_db.update_message(message.uuid, edited_status=True)
+
+        message = list(self.client_db.list_messages(flow3))[0]
+        self.assertEqual(message.text, 'Edited text')
 
         message = list(self.client_db.list_messages(flow1))[0]
-        self.assertEqual(message.get('text'), old_flow1_message)
+        self.assertEqual(message.text, old_flow1_message)
 
     def test_list_flow(self):
         self.assertEqual(len(list(self.client_db.list_flow())), 3)

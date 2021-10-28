@@ -66,10 +66,17 @@ class TestClientDb(TestCase):
         flow3 = self.client_db.get_flow_id_by_uuid("fff3")
         message = list(self.client_db.list_messages(flow3))[0]
         self.assertEqual(message.get('text'), 'Message 3 in chat3 from user2')
+
         self.client_db.update_message(message.get('uuid'), text='Edited text')
+
         message = list(self.client_db.list_messages(flow3))[0]
         self.assertEqual(message.get('text'), 'Edited text')
-        flow1 = self.client_db.get_flow_id_by_uuid("fff1")
+
+        self.client_db.update_message(message.get('uuid'), edited_status=True)
+
+        message = list(self.client_db.list_messages(flow3))[0]
+        self.assertEqual(message.get('text'), 'Edited text')
+
         message = list(self.client_db.list_messages(flow1))[0]
         self.assertEqual(message.get('text'), old_flow1_message)
 

@@ -12,8 +12,11 @@ websockets = "==10.0"
 loguru = "==0.5.3"
 pillow = "==8.4.0"
 SQLObject = "==3.8.0"
+click = "==7.1.2"
 
 [dev-packages]
+flake8 = "==4.0.1"
+coverage = "==6.0.2"
 
 [requires]
 python_version = "3.9"

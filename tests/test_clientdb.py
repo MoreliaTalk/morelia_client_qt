@@ -1,13 +1,16 @@
 from unittest import TestCase
 
-from modules.database import clientdb
+from loguru import logger
 
 import sqlite3
+
+from modules.database import clientdb
 
 
 class TestClientDb(TestCase):
     @classmethod
     def setUpClass(cls):
+        logger.remove()
         cls.client_db = clientdb.ClientDb("sqlite:/:memory:")
 
     def setUp(self):

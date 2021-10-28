@@ -1,6 +1,7 @@
 import sys
 import inspect
 from operator import itemgetter
+from loguru import logger
 
 import sqlobject as orm
 
@@ -48,7 +49,7 @@ class ClientDb:
             models.UserConfig(uuid=uuid, username=username, email=email,
                               avatar=avatar, bio=bio, isBot=is_bot)
         except orm.dberrors.OperationalError as error:
-            print(f'Failed to add user. Error text: {error}')
+            logger.error(f'Failed to add user. Error text: {error}')
 
     @staticmethod
     def add_flow(uuid, title, time_created=None, flow_type=None, info=None, owner=None):
@@ -56,7 +57,7 @@ class ClientDb:
             models.Flow(uuid=uuid, title=title, timeCreated=time_created,
                         flowType=flow_type, info=info, owner=owner)
         except orm.dberrors.OperationalError as error:
-            print(f'Failed to add flow. Error text: {error}')
+            logger.error(f'Failed to add flow. Error text: {error}')
 
     @staticmethod
     def add_message(uuid, text, time, user_id, flow_id,
@@ -76,7 +77,7 @@ class ClientDb:
                            editedTime=edited_time,
                            editedStatus=edited_status)
         except orm.dberrors.OperationalError as error:
-            print(f'Failed to add message. Error text: {error}')
+            logger.error(f'Failed to add message. Error text: {error}')
 
     @staticmethod
     def update_message(uuid, text=None,
@@ -101,7 +102,7 @@ class ClientDb:
             if edited_status:
                 db_query.editedStatus = edited_status
         except orm.dberrors.OperationalError as error:
-            print(f'Failed to update message. Error text: {error}')
+            logger.error(f'Failed to update message. Error text: {error}')
 
     @staticmethod
     def list_flow():
@@ -132,37 +133,29 @@ class ClientDb:
     def get_user_id_by_uuid(user_uuid):
         try:
             return models.UserConfig.selectBy(uuid=user_uuid).getOne().id
-        except orm.main.SQLObjectNotFound:
-            return None
-        except orm.dberrors.OperationalError:
-            return None
+        except (orm.main.SQLObjectNotFound, orm.dberrors.OperationalError):
+            logger.error(f'Failed to find user by uuid: {user_uuid}')
 
     @staticmethod
     def get_user_uuid_by_id(user_id):
         try:
             return models.UserConfig.selectBy(id=user_id).getOne().uuid
-        except orm.main.SQLObjectNotFound:
-            return None
-        except orm.dberrors.OperationalError:
-            return None
+        except (orm.main.SQLObjectNotFound, orm.dberrors.OperationalError):
+            logger.error(f'Failed to find user by id: {user_id}')
 
     @staticmethod
     def get_flow_id_by_uuid(flow_uuid):
         try:
             return models.Flow.selectBy(uuid=flow_uuid).getOne().id
-        except orm.main.SQLObjectNotFound:
-            return None
-        except orm.dberrors.OperationalError:
-            return None
+        except (orm.main.SQLObjectNotFound, orm.dberrors.OperationalError):
+            logger.error(f'Failed to find flow by uuid: {flow_uuid}')
 
     @staticmethod
     def get_flow_uuid_by_id(flow_id):
         try:
             return models.Flow.selectBy(id=flow_id).getOne().uuid
-        except orm.main.SQLObjectNotFound:
-            return None
-        except orm.dberrors.OperationalError:
-            return None
+        except (orm.main.SQLObjectNotFound, orm.dberrors.OperationalError):
+            logger.error(f'Failed to find flow by id: {flow_id}')
 
     @staticmethod
     def get_user(user_uuid=None, user_id=None):
@@ -173,12 +166,8 @@ class ClientDb:
                 return models.UserConfig.selectBy(id=user_id).getOne()
             elif user_uuid:
                 return models.UserConfig.selectBy(uuid=user_uuid).getOne()
-            else:
-                return None
-        except orm.main.SQLObjectNotFound:
-            return None
-        except orm.dberrors.OperationalError:
-            return None
+        except (orm.main.SQLObjectNotFound, orm.dberrors.OperationalError):
+            logger.error(f'Failed to find user by id, uuid: {user_id}, {user_uuid}')
 
     @staticmethod
     def get_flow(flow_uuid=None, flow_id=None):
@@ -189,12 +178,8 @@ class ClientDb:
                 return models.Flow.selectBy(id=flow_id).getOne()
             elif flow_uuid:
                 return models.Flow.selectBy(uuid=flow_uuid).getOne()
-            else:
-                return None
-        except orm.main.SQLObjectNotFound:
-            return None
-        except orm.dberrors.OperationalError:
-            return None
+        except (orm.main.SQLObjectNotFound, orm.dberrors.OperationalError):
+            logger.error(f'Failed to find user by id, uuid: {flow_id}, {flow_uuid}')
 
     @staticmethod
     def get_param(param, default_value=""):

@@ -4,19 +4,25 @@ import sass
 
 from PyQt5.QtWidgets import QMainWindow
 
-from interfaces.main_window import Ui_MainWindow
-from modules.chats_controller import ChatsController
-from modules.message_controller import MessageController
+from interfaces.raw.main_window import Ui_MainWindow
+from interfaces.chats_controller import ChatsController
+from interfaces.message_controller import MessageController
+
+from loguru import logger
+from modules.logging import set_logger_setting
+
+set_logger_setting()
 
 
 class MainWindow(Ui_MainWindow, QMainWindow):
     def __init__(self):
         super().__init__()
 
-        # For direct load .UI use: self.ui = uic.loadUi(path.join("interfaces", "ui", "main_window.ui"), self)
-        self.setupUi(self)
+        logger.info("Start client")
 
+        self.setupUi(self)
         self.setColorTheme()
+
         self.MessageController = MessageController(self.MessageAreaContentLayout)
         self.ChatsController = ChatsController(self.ContactsContent)
 
@@ -28,17 +34,29 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         text_css = file.read()
         file.close()
 
+        custom_theme = False
+
         if primary_color:
             text_css = text_css.replace("#00ff00", primary_color)
+            custom_theme = True
 
         if secondary_color:
             text_css = text_css.replace("#fde910", secondary_color)
+            custom_theme = True
 
         if background_color:
             text_css = text_css.replace("#161616", background_color)
+            custom_theme = True
 
-        print(text_css)
         text_css = sass.compile(string=text_css)
         self.setStyleSheet(text_css)
+
+        if custom_theme:
+            logger.info("set custom color theme")
+            logger.info(f"primary color: {primary_color}")
+            logger.info(f"secondary color: {secondary_color}")
+            logger.info(f"background color: {background_color}")
+        else:
+            logger.info("set standart color theme")
 
         return text_css

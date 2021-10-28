@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QLabel, QSizePolicy
+from loguru import logger
 
 
 class MessageController:
@@ -26,5 +27,7 @@ class MessageController:
 
         else:
             return False
+
+        logger.info(f"add new message type: {type} text: {text}")
 
         return new_message

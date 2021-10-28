@@ -69,28 +69,28 @@ class ClientDb:
 
     @staticmethod
     def list_flow():
-        listFlow = []
-        dbQuery = models.Flow.selectBy()
-        for flow in dbQuery:
-            secondQuery = models.Message.selectBy(flow=flow.id).orderBy("-time")
-            if secondQuery.count():
-                listFlow.append({'id': flow.id, 'uuid': flow.uuid, 'title': flow.title,
-                                 'lastMessage': secondQuery[0].text,
-                                 'lastTime': secondQuery[0].time,
-                                 'count': secondQuery.count()})
+        list_flow = []
+        db_query = models.Flow.selectBy()
+        for flow in db_query:
+            second_query = models.Message.selectBy(flow=flow.id).orderBy("-time")
+            if second_query.count():
+                list_flow.append({'id': flow.id, 'uuid': flow.uuid, 'title': flow.title,
+                                  'last_message': second_query[0].text,
+                                  'last_time': second_query[0].time,
+                                  'count': second_query.count()})
             else:
-                listFlow.append({'id': flow.id, 'uuid': flow.uuid, 'title': flow.title,
-                                 'lastMessage': "", 'lastTime': 0, 'count': 0})
-        for line in sorted(listFlow, key=itemgetter('lastTime'), reverse=True):
+                list_flow.append({'id': flow.id, 'uuid': flow.uuid, 'title': flow.title,
+                                  'last_message': "", 'last_time': 0, 'count': 0})
+        for line in sorted(list_flow, key=itemgetter('last_time'), reverse=True):
             yield line
 
     @staticmethod
     def list_messages(flow_id):
-        dbQuery = models.Message.selectBy(flow=flow_id).orderBy("-time")
-        for line in dbQuery:
+        db_query = models.Message.selectBy(flow=flow_id).orderBy("-time")
+        for line in db_query:
             user = models.UserConfig.selectBy(id=line.user).getOne()
             yield {'id': line.id, 'uuid': line.uuid, 'text': line.text, 'time': line.time,
-                   'userid': user.id, 'userUuid': user.uuid, 'username': user.username}
+                   'userid': user.id, 'user_uuid': user.uuid, 'username': user.username}
 
     @staticmethod
     def get_user_id_by_uuid(user_uuid):
@@ -129,24 +129,24 @@ class ClientDb:
             return None
 
     @staticmethod
-    def get_param(param, defaultValue=""):
-        dbQuery = config_models.Config.selectBy(param=param)
-        if dbQuery.count():
-            return dbQuery[0].value
+    def get_param(param, default_value=""):
+        db_query = config_models.Config.selectBy(param=param)
+        if db_query.count():
+            return db_query[0].value
         else:
-            return defaultValue
+            return default_value
 
     @staticmethod
     def set_param(param, value):
-        dbQuery = config_models.Config.selectBy(param=param)
-        if dbQuery.count():
-            dbQuery[0].value = value
+        db_query = config_models.Config.selectBy(param=param)
+        if db_query.count():
+            db_query[0].value = value
         else:
             return config_models.Config(param=param, value=value)
 
     @staticmethod
     def delete_param(param):
-        dbQuery = config_models.Config.selectBy(param=param)
-        if dbQuery.count():
-            dbQuery[0].delete(dbQuery[0].id)
+        db_query = config_models.Config.selectBy(param=param)
+        if db_query.count():
+            db_query[0].delete(db_query[0].id)
 

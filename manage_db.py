@@ -69,21 +69,21 @@ from modules.database.clientdb import ClientDb
               help='Parameter value to set in config.')
 def main(db, show, user, flow, message, uuid, username, title, text,
          time, flowid, userid, config, param, value):
-    clientDb = ClientDb()
+    client_db = ClientDb()
     if db == "create":
         start_time = process_time()
-        clientDb.create_db()
+        client_db.create_db()
         click.echo(f'Database structure is created at: '
                    f'{process_time() - start_time} sec.')
     elif db == "delete":
         start_time = process_time()
-        clientDb.delete_tables()
+        client_db.delete_tables()
         click.echo(f'Database table is dropped at: '
                    f'{process_time() - start_time} sec.')
     if user == "add":
         if uuid and username:
             start_time = process_time()
-            clientDb.add_user(uuid, username)
+            client_db.add_user(uuid, username)
             click.echo(f'User added at: '
                        f'{process_time() - start_time} sec.')
         else:
@@ -91,7 +91,7 @@ def main(db, show, user, flow, message, uuid, username, title, text,
     if flow == "add":
         if uuid and title:
             start_time = process_time()
-            clientDb.add_flow(uuid, title)
+            client_db.add_flow(uuid, title)
             click.echo(f'Flow added at: '
                        f'{process_time() - start_time} sec.')
         else:
@@ -99,21 +99,21 @@ def main(db, show, user, flow, message, uuid, username, title, text,
     if message == "add":
         if uuid and text and time and userid and flowid:
             start_time = process_time()
-            clientDb.add_message(uuid, text, int(time), userid, flowid)
+            client_db.add_message(uuid, text, int(time), userid, flowid)
             click.echo(f'Message added at: '
                        f'{process_time() - start_time} sec.')
         else:
             click.echo(f'All text, time, userid and flowid must be specified for flow.')
     if show == "flow":
         start_time = process_time()
-        for line in clientDb.list_flow():
+        for line in client_db.list_flow():
             click.echo(line)
         click.echo(f'Select flow list at: '
                    f'{process_time() - start_time} sec.')
     elif show == "messages":
         if flowid:
             start_time = process_time()
-            for line in clientDb.list_messages(flowid):
+            for line in client_db.list_messages(flowid):
                 click.echo(line)
             click.echo(f'Select message list at: '
                        f'{process_time() - start_time} sec.')
@@ -121,17 +121,17 @@ def main(db, show, user, flow, message, uuid, username, title, text,
             click.echo(f'Flowid must be specified for flow.')
     if config == "get":
         if param:
-            click.echo(f'{param}={clientDb.get_param(param, "[Value not set]")}')
+            click.echo(f'{param}={client_db.get_param(param, "[Value not set]")}')
         else:
             click.echo(f'Param name must be specified for get it.')
     elif config == "set":
         if param and value:
-            clientDb.set_param(param, value)
+            client_db.set_param(param, value)
         else:
             click.echo(f'Param name and Value must be specified for set it.')
     elif config == "delete":
         if param:
-            clientDb.delete_param(param)
+            client_db.delete_param(param)
         else:
             click.echo(f'Param name must be specified for delete it.')
 

@@ -59,13 +59,22 @@ class ClientDb:
             print(f'Failed to add flow. Error text: {error}')
 
     @staticmethod
-    def add_message(uuid, text, time, userId, flowId):
+    def add_message(uuid, text, time, user_id, flow_id,
+                    file_picture=None, file_video=None, file_audio=None,
+                    file_document=None, emoji=None, edited_time=None, edited_status=None):
         try:
             models.Message(uuid=uuid,
                            text=text,
                            time=time,
-                           flow=flowId,
-                           user=userId)
+                           flow=flow_id,
+                           user=user_id,
+                           filePicture=file_picture,
+                           fileVideo=file_video,
+                           fileAudio=file_audio,
+                           fileDocument=file_document,
+                           emoji=emoji,
+                           editedTime=edited_time,
+                           editedStatus=edited_status)
         except orm.dberrors.OperationalError as error:
             print(f'Failed to add flow. Error text: {error}')
 

@@ -15,6 +15,21 @@ class ClientDb:
         orm.sqlhub.processConnection = self.connection
 
     @staticmethod
+    def check_db_tables_created():
+        return_data = True
+        classes = [cls_name for cls_name, cls_obj
+                   in inspect.getmembers(sys.modules['modules.database.models'])
+                   if inspect.isclass(cls_obj)]
+        for item in classes:
+            class_ = getattr(models, item)
+            try:
+                class_.select().count()
+            except orm.dberrors.OperationalError:
+                return_data = False
+        
+        return return_data
+
+    @staticmethod
     def create_db():
         # looking for all Classes listed in models.py
         classes = [cls_name for cls_name, cls_obj

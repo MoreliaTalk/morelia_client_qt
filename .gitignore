@@ -4,3 +4,4 @@ __pycache__
 htmlcov/
 .idea/
 log/
+db_sqlite.db

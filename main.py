@@ -10,6 +10,7 @@ from interfaces.message_controller import MessageController
 
 from loguru import logger
 from modules.logging import set_logger_setting
+from modules.database.clientdb import ClientDb
 
 set_logger_setting()
 
@@ -25,6 +26,12 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
         self.MessageController = MessageController(self.MessageAreaContentLayout)
         self.ChatsController = ChatsController(self.ContactsContent)
+        self.connect_to_db()
+
+    def connect_to_db(self):
+        db = ClientDb()
+        if not db.check_db_tables_created():
+            db.create_db()
 
     def setColorTheme(self, primary_color: str = None,
                       secondary_color: str = None,

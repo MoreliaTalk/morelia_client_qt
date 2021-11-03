@@ -29,9 +29,9 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.ChatsController = ChatsController(self.ContactsContent)
 
     def connect_to_db(self):
-        db = ClientDb()
-        if not db.check_db_tables_created():
-            db.create_db()
+        self.db = ClientDb()
+        if not self.db.check_db_tables_created():
+            self.db.create_db()
 
     def setColorTheme(self, primary_color: str = None,
                       secondary_color: str = None,

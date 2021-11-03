@@ -1,5 +1,7 @@
 from os import path
+from uuid import uuid4
 
+import typing
 import sass
 
 from PyQt5.QtWidgets import QMainWindow
@@ -11,6 +13,7 @@ from interfaces.message_controller import MessageController
 from loguru import logger
 from modules.logging import set_logger_setting
 from modules.database.clientdb import ClientDb
+from modules.database import models
 
 set_logger_setting()
 
@@ -27,6 +30,18 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
         self.MessageController = MessageController(self.MessageAreaContentLayout)
         self.ChatsController = ChatsController(self.ContactsContent)
+
+        self.load_flow_and_mes()
+
+    def load_flow_and_mes(self):
+        self.db.add_flow(str(uuid4()), "Vasya Pupkin")
+        list_flow: typing.List[models.Flow] = self.db.list_flow()
+        for flow in list_flow:
+            lastMessage = str()
+            self.ChatsController.add_chat(
+                chatName=flow.title,
+                lastMessageText="flow.lastMessage"
+            )
 
     def connect_to_db(self):
         self.db = ClientDb()

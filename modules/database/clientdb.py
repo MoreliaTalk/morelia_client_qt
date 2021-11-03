@@ -26,7 +26,7 @@ class ClientDb:
                 class_.select().count()
             except orm.dberrors.OperationalError:
                 return_data = False
-        
+
         return return_data
 
     @staticmethod

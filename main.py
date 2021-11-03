@@ -23,10 +23,10 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
         self.setupUi(self)
         self.setColorTheme()
+        self.connect_to_db()
 
         self.MessageController = MessageController(self.MessageAreaContentLayout)
         self.ChatsController = ChatsController(self.ContactsContent)
-        self.connect_to_db()
 
     def connect_to_db(self):
         db = ClientDb()

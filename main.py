@@ -34,13 +34,13 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.load_flow_and_mes()
 
     def load_flow_and_mes(self):
-        self.db.add_flow(str(uuid4()), "Vasya Pupkin")
         list_flow: typing.List[models.Flow] = self.db.list_flow()
         for flow in list_flow:
-            lastMessage = str()
+            lastMessage = self.db.get_last_message(flow.uuid)
+            lastMessageText = lastMessage.text if lastMessage else "Здесь пока нет сообщений"
             self.ChatsController.add_chat(
                 chatName=flow.title,
-                lastMessageText="flow.lastMessage"
+                lastMessageText=lastMessageText
             )
 
     def connect_to_db(self):

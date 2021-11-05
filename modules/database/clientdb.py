@@ -2,6 +2,7 @@ import sys
 import inspect
 from collections import namedtuple
 from operator import attrgetter
+import uuid
 from loguru import logger
 
 import sqlobject as orm
@@ -199,6 +200,14 @@ class ClientDb:
                 return models.Flow.selectBy(uuid=flow_uuid).getOne()
         except (orm.main.SQLObjectNotFound, orm.dberrors.OperationalError) as error:
             logger.error(f'Failed to find user by id, uuid: {flow_id}, {flow_uuid}. Error {error}')
+
+    def get_last_message(self, flow_uuid):
+        flow_id = self.get_flow_id_by_uuid(flow_uuid)
+        list_mes = list(self.list_messages(flow_id))
+        if len(list_mes):
+            return list_mes[0]
+        else:
+            return None
 
     @staticmethod
     def get_param(param, default_value=""):

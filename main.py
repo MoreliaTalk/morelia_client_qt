@@ -30,8 +30,11 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
         self.MessageController = MessageController(self.MessageAreaContentLayout)
         self.ChatsController = ChatsController(self.ContactsContent)
-
         self.load_flow_and_mes()
+
+        self.ChatsController.signals.selected_chat.connect(
+            lambda x: print(x.uuid)
+        )
 
     def load_flow_and_mes(self):
         list_flow: typing.List[models.Flow] = self.db.list_flow()
@@ -39,6 +42,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             lastMessage = self.db.get_last_message(flow.uuid)
             lastMessageText = lastMessage.text if lastMessage else "Здесь пока нет сообщений"
             self.ChatsController.add_chat(
+                uuid=flow.uuid,
                 chatName=flow.title,
                 lastMessageText=lastMessageText
             )

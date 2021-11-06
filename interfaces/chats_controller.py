@@ -4,6 +4,9 @@ from PIL import Image, ImageDraw
 from PIL.ImageQt import ImageQt
 
 from PyQt5 import QtWidgets
+from PyQt5 import QtGui
+from PyQt5 import QtCore
+from PyQt5.QtCore import QObject, pyqtSignal as Signal
 from PyQt5.QtGui import QImage, QPixmap
 from loguru import logger
 
@@ -11,10 +14,17 @@ from .raw.contact_card import Ui_ContactCard
 
 
 class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
-    def __init__(self, chatName: str, lastMessageText: str, image: Image.Image = None):
+    def __init__(self,
+                 signals: QObject,
+                 uuid: str,
+                 chatName: str,
+                 lastMessageText: str,
+                 image: Image.Image = None):
         super().__init__()
 
         self.setupUi(self)
+        self.signals = signals
+        self.uuid = uuid
 
         self.ChatNameLabel.setText(chatName)
         self.ChatLastMessageLabel.setText(lastMessageText)
@@ -57,14 +67,22 @@ class ChatItem(Ui_ContactCard, QtWidgets.QWidget):
                 f"background-color: { randomColor }"
             )
 
+    def mousePressEvent(self, event: QtGui.QMouseEvent):
+        if event.button() == QtCore.Qt.MouseButton.LeftButton:
+            self.signals.selected_chat.emit(self)
+
 
 class ChatsController:
+    class ChatsSignals(QObject):
+        selected_chat = Signal(ChatItem)
+
     def __init__(self, ChatsContentLayout: QtWidgets.QLayout):
         self.ChatsContentLayout = ChatsContentLayout
         self.list_chats: list[ChatItem] = list()
+        self.signals = self.ChatsSignals()
 
-    def add_chat(self, chatName: str, lastMessageText: str, image: Image.Image = None):
-        new_chat_item = ChatItem(chatName, lastMessageText, image)
+    def add_chat(self, uuid: str, chatName: str, lastMessageText: str, image: Image.Image = None):
+        new_chat_item = ChatItem(self.signals, uuid, chatName, lastMessageText, image)
         self.list_chats.append(new_chat_item)
         self.ChatsContentLayout.addWidget(new_chat_item)
         logger.info(f"add new chat(chatName {chatName}, lastMessageText: {lastMessageText})")

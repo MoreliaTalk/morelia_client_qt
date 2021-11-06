@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file './ui/contact_card.ui'
+# Form implementation generated from reading ui file 'ui/contact_card.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -16,19 +16,25 @@ class Ui_ContactCard(object):
         ContactCard.setObjectName("ContactCard")
         ContactCard.resize(95, 40)
         ContactCard.setAutoFillBackground(True)
-        self.horizontalLayout = QtWidgets.QHBoxLayout(ContactCard)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.ContactAvatar = QtWidgets.QLabel(ContactCard)
+        self.gridLayout = QtWidgets.QGridLayout(ContactCard)
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout.setHorizontalSpacing(0)
+        self.gridLayout.setObjectName("gridLayout")
+        self.ContactCardContent = QtWidgets.QWidget(ContactCard)
+        self.ContactCardContent.setObjectName("ContactCardContent")
+        self.ContactCardContentLayout = QtWidgets.QHBoxLayout(self.ContactCardContent)
+        self.ContactCardContentLayout.setContentsMargins(0, 0, 0, 0)
+        self.ContactCardContentLayout.setObjectName("ContactCardContentLayout")
+        self.ContactAvatar = QtWidgets.QLabel(self.ContactCardContent)
         self.ContactAvatar.setMinimumSize(QtCore.QSize(40, 40))
         self.ContactAvatar.setMaximumSize(QtCore.QSize(40, 40))
         self.ContactAvatar.setText("")
         self.ContactAvatar.setAlignment(QtCore.Qt.AlignCenter)
         self.ContactAvatar.setObjectName("ContactAvatar")
-        self.horizontalLayout.addWidget(self.ContactAvatar)
+        self.ContactCardContentLayout.addWidget(self.ContactAvatar)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
-        self.ChatNameLabel = QtWidgets.QLabel(ContactCard)
+        self.ChatNameLabel = QtWidgets.QLabel(self.ContactCardContent)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -36,7 +42,7 @@ class Ui_ContactCard(object):
         self.ChatNameLabel.setSizePolicy(sizePolicy)
         self.ChatNameLabel.setObjectName("ChatNameLabel")
         self.verticalLayout.addWidget(self.ChatNameLabel)
-        self.ChatLastMessageLabel = QtWidgets.QLabel(ContactCard)
+        self.ChatLastMessageLabel = QtWidgets.QLabel(self.ContactCardContent)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -44,7 +50,8 @@ class Ui_ContactCard(object):
         self.ChatLastMessageLabel.setSizePolicy(sizePolicy)
         self.ChatLastMessageLabel.setObjectName("ChatLastMessageLabel")
         self.verticalLayout.addWidget(self.ChatLastMessageLabel)
-        self.horizontalLayout.addLayout(self.verticalLayout)
+        self.ContactCardContentLayout.addLayout(self.verticalLayout)
+        self.gridLayout.addWidget(self.ContactCardContent, 0, 0, 1, 1)
 
         self.retranslateUi(ContactCard)
         QtCore.QMetaObject.connectSlotsByName(ContactCard)

@@ -105,4 +105,14 @@ QMainWindow{
         border-radius: 10px;
         padding: 1.5px;
     }
+
+    QWidget#ContactCardContent{
+        QWidget{
+            background-color: rgba($background_color, $alpha: 0);
+        }
+        
+        &:hover{
+            background-color: lighten($background_color, 10);
+        }
+    }
 }    

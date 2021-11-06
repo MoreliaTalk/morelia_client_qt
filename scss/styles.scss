@@ -83,23 +83,6 @@ QMainWindow{
         }
     }
 
-    QLabel#ContactAvatar{
-    	border-radius: 20px;
-    	background-clip: border; 
-    	color: $invert_background_color; 
-    	font: 12pt;
-        font-weight: bold;
-    }                                      
-
-    QLabel#ChatLastMessageLabel{
-        color: $invert_background_color;
-    }                                      
-
-    QLabel#ChatNameLabel{
-        color: $invert_background_color;
-        font-weight: bold;
-    }
-
     QScrollArea#ChatListArea{
         border: 1.5px solid $primary_color;
         border-radius: 10px;
@@ -108,11 +91,28 @@ QMainWindow{
 
     QWidget#ContactCardContent{
         QWidget{
-            background-color: rgba($background_color, $alpha: 0);
+            background: none;
         }
-        
+
         &:hover{
             background-color: lighten($background_color, 10);
+        }
+
+        QLabel#ContactAvatar{
+            border-radius: 20px;
+            background-clip: border; 
+            color: $invert_background_color; 
+            font: 12pt;
+            font-weight: bold;
+        }                                      
+    
+        QLabel#ChatLastMessageLabel{
+            color: $invert_background_color;
+        }                                      
+    
+        QLabel#ChatNameLabel{
+            color: $invert_background_color;
+            font-weight: bold;
         }
     }
 }    

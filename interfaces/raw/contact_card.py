@@ -23,7 +23,7 @@ class Ui_ContactCard(object):
         self.ContactCardContent = QtWidgets.QWidget(ContactCard)
         self.ContactCardContent.setObjectName("ContactCardContent")
         self.ContactCardContentLayout = QtWidgets.QHBoxLayout(self.ContactCardContent)
-        self.ContactCardContentLayout.setContentsMargins(0, 0, 0, 0)
+        self.ContactCardContentLayout.setContentsMargins(9, 9, 9, 9)
         self.ContactCardContentLayout.setObjectName("ContactCardContentLayout")
         self.ContactAvatar = QtWidgets.QLabel(self.ContactCardContent)
         self.ContactAvatar.setMinimumSize(QtCore.QSize(40, 40))

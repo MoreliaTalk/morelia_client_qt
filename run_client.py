@@ -5,6 +5,6 @@ from main import MainWindow
 
 
 app = QApplication(sys.argv)
-window = MainWindow()
+window = MainWindow(app)
 window.show()
 sys.exit(app.exec_())

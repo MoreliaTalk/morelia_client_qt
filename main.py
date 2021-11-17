@@ -4,7 +4,7 @@ from uuid import uuid4
 import typing
 import sass
 
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from interfaces.raw.main_window import Ui_MainWindow
 from interfaces.chats_controller import ChatsController
@@ -19,8 +19,9 @@ set_logger_setting()
 
 
 class MainWindow(Ui_MainWindow, QMainWindow):
-    def __init__(self):
+    def __init__(self, app: QApplication):
         super().__init__()
+        self.app = app
 
         logger.info("Start client")
 
@@ -55,6 +56,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
     def setColorTheme(self, primary_color: str = None,
                       secondary_color: str = None,
                       background_color: str = None):
+        self.app.setStyle("fusion")
 
         file = open(path.join("scss", "styles.scss"), "r")
         text_css = file.read()

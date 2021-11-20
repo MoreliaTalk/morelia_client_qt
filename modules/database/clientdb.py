@@ -205,7 +205,7 @@ class ClientDb:
         flow_id = self.get_flow_id_by_uuid(flow_uuid)
         list_mes = list(self.list_messages(flow_id))
         if len(list_mes):
-            return list_mes[0]
+            return list_mes[-1]
         else:
             return None
 

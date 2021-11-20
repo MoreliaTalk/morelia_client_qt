@@ -29,12 +29,12 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.setColorTheme()
         self.connect_to_db()
 
-        self.MessageController = MessageController(self.MessageAreaContentLayout)
+        self.MessageController = MessageController(self, self.MessageAreaContentLayout)
         self.ChatsController = ChatsController(self.ContactsContent)
         self.load_flow_and_mes()
 
         self.ChatsController.signals.selected_chat.connect(
-            lambda x: print(x.uuid)
+            lambda chat: self.MessageController.load_messages_current_chat(chat.uuid)
         )
 
     def load_flow_and_mes(self):

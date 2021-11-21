@@ -15,6 +15,10 @@ $invert_background_color: invert($background_color);
     } @else if ($type == "other_user"){
         background-color: $secondary_color;
         border-bottom-left-radius: 5px;
+    } @else if ($type == "special"){
+        background-color: lighten(mix($primary_color, $secondary_color, 50%), 10%);
+        padding: 5px;
+        border-radius: 10px;
     }
 }
 
@@ -37,6 +41,10 @@ QMainWindow{
 
     QLabel#otherUserMessage{
         @include Message("other_user")
+    }
+
+    QLabel#specialMessage{
+        @include Message("special")
     }
     
     QScrollArea#MessageArea{

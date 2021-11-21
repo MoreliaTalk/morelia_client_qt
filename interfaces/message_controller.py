@@ -27,7 +27,11 @@ class MessageController:
 
         if len(list_messages):
             for message in list_messages:
-                self._add_message("my", message.text)
+                if message.user_uuid == self.MainWindow.db.get_param("user_uuid"):
+                    self._add_message("my", message.text)
+                else:
+                    self._add_message("other_user", message.text)
+
         else:
             self._add_message("special", "Здесь пока нет сообщений")
 

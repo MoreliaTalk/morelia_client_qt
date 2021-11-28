@@ -1,11 +1,21 @@
 from typing import List
 from PyQt5.QtWidgets import QGridLayout, QLabel, QMainWindow, QSizePolicy, QWidget
 from loguru import logger
+from .raw.message_card import Ui_MessageCard
 
 
-class MessageItem(QLabel):
-    def __init__(self):
+class MessageItem(Ui_MessageCard, QWidget):
+    def __init__(self, text: str, username: str = None):
         super().__init__()
+
+        self.setupUi(self)
+
+        if username:
+            self.usernameLabel.setText(f"<b>{username}<b>")
+        else:
+            self.usernameLabel.deleteLater()
+
+        self.textLabel.setText(text)
 
 
 class MessageController:
@@ -30,11 +40,13 @@ class MessageController:
                 if message.user_uuid == self.MainWindow.db.get_param("user_uuid"):
                     self._add_message("my", message.text)
                 else:
-                    self._add_message("other_user", message.text)
+                    if self.MainWindow.db.get_flow(flow_uuid=chat_uuid).flowType == "group":
+                        self._add_message("other_user", message.text, message.username)
+                    else:
+                        self._add_message("other_user", message.text)
 
         else:
             self._add_message("special", "Здесь пока нет сообщений")
-
 
     def _clear(self):
         messages = self.MessageAreaContentLayout.parentWidget().findChildren(MessageItem)
@@ -42,29 +54,28 @@ class MessageController:
         for mes in messages:
             mes.deleteLater()
 
-        logger.info(f"clear MessagePole")
+        logger.info("clear MessagePole")
 
-    def _add_message(self, type: str, text: str):
-        new_message = MessageItem()
-        new_message.setText(text)
+    def _add_message(self, type: str, text: str, username: str = None):
+        new_message = MessageItem(text, username)
         new_message.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Minimum)
 
         if type == "my":
-            new_message.setObjectName("myMessage")
+            new_message.WidgetContent.setObjectName("myMessage")
 
             self.MessageAreaContentLayout.addWidget(QLabel())
             self.MessageAreaContentLayout.addWidget(QLabel())
             self.MessageAreaContentLayout.addWidget(new_message)
 
         elif type == "other_user":
-            new_message.setObjectName("otherUserMessage")
+            new_message.WidgetContent.setObjectName("otherUserMessage")
 
             self.MessageAreaContentLayout.addWidget(new_message)
             self.MessageAreaContentLayout.addWidget(QLabel())
             self.MessageAreaContentLayout.addWidget(QLabel())
 
         elif type == "special":
-            new_message.setObjectName("specialMessage")
+            new_message.WidgetContent.setObjectName("specialMessage")
 
             self.MessageAreaContentLayout.addWidget(QLabel())
             self.MessageAreaContentLayout.addWidget(new_message)

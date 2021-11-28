@@ -9,6 +9,10 @@ $invert_background_color: invert($background_color);
     border-radius: 15px;
     margin: 0px;
 
+    QWidget{
+        background: none;
+    }
+
     @if ($type == "my"){
         background-color: $primary_color;
         border-bottom-right-radius: 5px;
@@ -35,15 +39,15 @@ QMainWindow{
     }
     */
 
-    QLabel#myMessage{
+    QWidget#myMessage{
         @include Message("my")
     }
 
-    QLabel#otherUserMessage{
+    QWidget#otherUserMessage{
         @include Message("other_user")
     }
 
-    QLabel#specialMessage{
+    QWidget#specialMessage{
         @include Message("special")
     }
     

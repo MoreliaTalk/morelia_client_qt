@@ -1,7 +1,9 @@
 from os import path
+from pathlib import Path
 from uuid import uuid4
 
 import typing
+from PyQt5.QtGui import QFont, QFontDatabase
 import sass
 
 from PyQt5.QtWidgets import QApplication, QMainWindow
@@ -26,6 +28,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         logger.info("Start client")
 
         self.setupUi(self)
+        self.load_font()
         self.setColorTheme()
         self.connect_to_db()
 
@@ -53,10 +56,31 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         if not self.db.check_db_tables_created():
             self.db.create_db()
 
+    def load_font(self):
+        fonts_dict = {
+            "Roboto": (
+                "Black",
+                "BlackItalic",
+                "Bold",
+                "BoldItalic",
+                "Italic",
+                "Light",
+                "LightItalic",
+                "Medium",
+                "Regular",
+                "Thin",
+                "ThinItalic"
+            )
+        }
+        for font_family in fonts_dict:
+            for font in font_family:
+                QFontDatabase.addApplicationFont(str(Path.cwd() / "fonts" / f"{font}.ttf"))
+
     def setColorTheme(self, primary_color: str = None,
                       secondary_color: str = None,
                       background_color: str = None):
         self.app.setStyle("fusion")
+        self.app.setFont(QFont("Roboto", 10))
 
         file = open(path.join("scss", "styles.scss"), "r")
         text_css = file.read()

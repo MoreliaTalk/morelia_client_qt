@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication
 import sys
 
 from main import MainWindow
@@ -7,4 +7,4 @@ from main import MainWindow
 app = QApplication(sys.argv)
 window = MainWindow(app)
 window.show()
-sys.exit(app.exec_())
+sys.exit(app.exec())

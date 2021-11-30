@@ -3,11 +3,11 @@ import random
 from PIL import Image, ImageDraw
 from PIL.ImageQt import ImageQt
 
-from PyQt5 import QtWidgets
-from PyQt5 import QtGui
-from PyQt5 import QtCore
-from PyQt5.QtCore import QObject, pyqtSignal as Signal
-from PyQt5.QtGui import QImage, QPixmap
+from PySide6 import QtWidgets
+from PySide6 import QtGui
+from PySide6 import QtCore
+from PySide6.QtCore import QObject, Signal
+from PySide6.QtGui import QImage, QPixmap
 from loguru import logger
 
 from .raw.contact_card import Ui_ContactCard

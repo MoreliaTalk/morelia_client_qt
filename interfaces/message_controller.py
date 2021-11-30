@@ -1,5 +1,5 @@
 from typing import List
-from PyQt5.QtWidgets import QGridLayout, QLabel, QMainWindow, QSizePolicy, QWidget
+from PySide6.QtWidgets import QGridLayout, QLabel, QMainWindow, QSizePolicy, QWidget
 from loguru import logger
 from .raw.message_card import Ui_MessageCard
 

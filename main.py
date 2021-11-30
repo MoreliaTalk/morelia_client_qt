@@ -3,10 +3,10 @@ from pathlib import Path
 from uuid import uuid4
 
 import typing
-from PyQt5.QtGui import QFont, QFontDatabase
+from PySide6.QtGui import QFont, QFontDatabase
 import sass
 
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow
 
 from interfaces.raw.main_window import Ui_MainWindow
 from interfaces.chats_controller import ChatsController

@@ -171,7 +171,7 @@
          <number>0</number>
         </property>
         <property name="topMargin">
-         <number>5</number>
+         <number>0</number>
         </property>
         <property name="rightMargin">
          <number>0</number>
@@ -179,8 +179,11 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <property name="spacing">
+        <property name="horizontalSpacing">
          <number>0</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>3</number>
         </property>
         <item row="0" column="0" colspan="2">
          <spacer name="verticalSpacer">

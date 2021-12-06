@@ -103,9 +103,10 @@ class Ui_MainWindow(object):
         self.MessageAreaContent.setObjectName(u"MessageAreaContent")
         self.MessageAreaContent.setGeometry(QRect(0, 0, 628, 471))
         self.MessageAreaContentLayout = QGridLayout(self.MessageAreaContent)
-        self.MessageAreaContentLayout.setSpacing(0)
         self.MessageAreaContentLayout.setObjectName(u"MessageAreaContentLayout")
-        self.MessageAreaContentLayout.setContentsMargins(0, 5, 0, 0)
+        self.MessageAreaContentLayout.setHorizontalSpacing(0)
+        self.MessageAreaContentLayout.setVerticalSpacing(5)
+        self.MessageAreaContentLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.MessageAreaContentLayout.addItem(self.verticalSpacer, 0, 0, 1, 2)

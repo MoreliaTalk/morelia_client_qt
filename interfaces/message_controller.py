@@ -31,6 +31,13 @@ class MessageController:
 
     def load_messages_current_chat(self, chat_uuid: str):
         self._clear()
+
+        for chat in self.MainWindow.ChatsController.list_chats:
+            if chat.uuid == chat_uuid:
+                chat.setStyleSheet("background-color: #424242")
+            else:
+                chat.setStyleSheet("")
+
         list_messages = list(self.MainWindow.db.list_messages(
             self.MainWindow.db.get_flow_id_by_uuid(chat_uuid)
             ))

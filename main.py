@@ -28,6 +28,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         logger.info("Start client")
 
         self.setupUi(self)
+        self.setWindowTitle("MoreliaTalk")
         self.load_font()
         self.setColorTheme()
         self.connect_to_db()

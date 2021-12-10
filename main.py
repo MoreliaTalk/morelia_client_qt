@@ -2,7 +2,7 @@ from os import path
 from pathlib import Path
 from uuid import uuid4
 
-import typing
+from typing import List
 from PySide6.QtGui import QFont, QFontDatabase
 import sass
 
@@ -15,7 +15,7 @@ from interfaces.message_controller import MessageController
 from loguru import logger
 from modules.logging import set_logger_setting
 from modules.database.clientdb import ClientDb
-from modules.database import models
+from modules.database.models import Flow
 
 set_logger_setting()
 
@@ -42,7 +42,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         )
 
     def load_flow_and_mes(self):
-        list_flow: typing.List[models.Flow] = self.db.list_flow()
+        list_flow: List[Flow] = self.db.list_flow()
         for flow in list_flow:
             lastMessage = self.db.get_last_message(flow.uuid)
             lastMessageText = lastMessage.text if lastMessage else "Здесь пока нет сообщений"

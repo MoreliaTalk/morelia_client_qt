@@ -57,7 +57,6 @@ class MessageController:
 
     def _clear(self):
         messages = self.MessageAreaContentLayout.parentWidget().findChildren(MessageItem)
-        messages: List[MessageItem]
         for mes in messages:
             mes.deleteLater()
 

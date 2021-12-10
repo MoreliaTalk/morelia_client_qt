@@ -54,8 +54,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
     def connect_to_db(self):
         self.db = ClientDb()
-        if not self.db.check_db_tables_created():
-            self.db.create_db()
+        self.db.create_db()
 
     def load_font(self):
         fonts_dict = {

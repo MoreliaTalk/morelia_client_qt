@@ -33,8 +33,8 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.setColorTheme()
         self.connect_to_db()
 
-        self.MessageController = MessageController(self, self.MessageAreaContentLayout)
         self.ChatsController = ChatsController(self.ContactsContent)
+        self.MessageController = MessageController(self.db, self.ChatsController, self.MessageAreaContentLayout)
         self.load_flow_and_mes()
 
         self.ChatsController.signals.selected_chat.connect(

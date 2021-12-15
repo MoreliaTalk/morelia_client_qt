@@ -1,6 +1,8 @@
 from typing import List
 from PySide6.QtWidgets import QGridLayout, QLabel, QMainWindow, QSizePolicy, QWidget
 from loguru import logger
+
+from modules.database.clientdb import ClientDb
 from .raw.message_card import Ui_MessageCard
 
 
@@ -19,7 +21,7 @@ class MessageItem(Ui_MessageCard, QWidget):
 
 
 class MessageController:
-    def __init__(self, MainWindow, MessageAreaContentLayout):
+    def __init__(self, db: ClientDb, ChatsController, MessageAreaContentLayout):
         super().__init__()
 
         self.MessageAreaContentLayout: QGridLayout = MessageAreaContentLayout
@@ -27,27 +29,28 @@ class MessageController:
         for i in range(3):
             self.MessageAreaContentLayout.setColumnStretch(i, 1)
 
-        self.MainWindow = MainWindow
+        self.db = db
+        self.ChatsController = ChatsController
 
     def load_messages_current_chat(self, chat_uuid: str):
         self._clear()
 
-        for chat in self.MainWindow.ChatsController.list_chats:
+        for chat in self.ChatsController.list_chats:
             if chat.uuid == chat_uuid:
                 chat.setStyleSheet("background-color: #424242")
             else:
                 chat.setStyleSheet("")
 
-        list_messages = list(self.MainWindow.db.list_messages(
-            self.MainWindow.db.get_flow_id_by_uuid(chat_uuid)
+        list_messages = list(self.db.list_messages(
+            self.db.get_flow_id_by_uuid(chat_uuid)
             ))
 
         if len(list_messages):
             for message in list_messages:
-                if message.user_uuid == self.MainWindow.db.get_param("user_uuid"):
+                if message.user_uuid == self.db.get_param("user_uuid"):
                     self._add_message("my", message.text)
                 else:
-                    if self.MainWindow.db.get_flow(flow_uuid=chat_uuid).flowType == "group":
+                    if self.db.get_flow(flow_uuid=chat_uuid).flowType == "group":
                         self._add_message("other_user", message.text, message.username)
                     else:
                         self._add_message("other_user", message.text)

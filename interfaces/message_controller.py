@@ -1,9 +1,9 @@
-from typing import List
-from PySide6.QtWidgets import QGridLayout, QLabel, QMainWindow, QSizePolicy, QWidget
+from PySide6.QtWidgets import QGridLayout, QLabel, QSizePolicy, QWidget
 from loguru import logger
 
+from interfaces.chats_controller import ChatsController
 from modules.database.clientdb import ClientDb
-from .raw.message_card import Ui_MessageCard
+from interfaces.raw.message_card import Ui_MessageCard
 
 
 class MessageItem(Ui_MessageCard, QWidget):
@@ -21,21 +21,24 @@ class MessageItem(Ui_MessageCard, QWidget):
 
 
 class MessageController:
-    def __init__(self, db: ClientDb, ChatsController, MessageAreaContentLayout):
+    def __init__(self,
+                 db: ClientDb,
+                 chats_controller: ChatsController,
+                 message_area_content_layout: QGridLayout):
         super().__init__()
 
-        self.MessageAreaContentLayout: QGridLayout = MessageAreaContentLayout
+        self.message_area_content_layout: QGridLayout = message_area_content_layout
 
         for i in range(3):
-            self.MessageAreaContentLayout.setColumnStretch(i, 1)
+            self.message_area_content_layout.setColumnStretch(i, 1)
 
         self.db = db
-        self.ChatsController = ChatsController
+        self.chats_controller = chats_controller
 
     def load_messages_current_chat(self, chat_uuid: str):
         self._clear()
 
-        for chat in self.ChatsController.list_chats:
+        for chat in self.chats_controller.list_chats:
             if chat.uuid == chat_uuid:
                 chat.setStyleSheet("background-color: #424242")
             else:
@@ -59,7 +62,7 @@ class MessageController:
             self._add_message("special", "Здесь пока нет сообщений")
 
     def _clear(self):
-        messages = self.MessageAreaContentLayout.parentWidget().findChildren(MessageItem)
+        messages = self.message_area_content_layout.parentWidget().findChildren(MessageItem)
         for mes in messages:
             mes.deleteLater()
 
@@ -72,23 +75,23 @@ class MessageController:
         if type == "my":
             new_message.WidgetContent.setObjectName("myMessage")
 
-            self.MessageAreaContentLayout.addWidget(QLabel())
-            self.MessageAreaContentLayout.addWidget(QLabel())
-            self.MessageAreaContentLayout.addWidget(new_message)
+            self.message_area_content_layout.addWidget(QLabel())
+            self.message_area_content_layout.addWidget(QLabel())
+            self.message_area_content_layout.addWidget(new_message)
 
         elif type == "other_user":
             new_message.WidgetContent.setObjectName("otherUserMessage")
 
-            self.MessageAreaContentLayout.addWidget(new_message)
-            self.MessageAreaContentLayout.addWidget(QLabel())
-            self.MessageAreaContentLayout.addWidget(QLabel())
+            self.message_area_content_layout.addWidget(new_message)
+            self.message_area_content_layout.addWidget(QLabel())
+            self.message_area_content_layout.addWidget(QLabel())
 
         elif type == "special":
             new_message.WidgetContent.setObjectName("specialMessage")
 
-            self.MessageAreaContentLayout.addWidget(QLabel())
-            self.MessageAreaContentLayout.addWidget(new_message)
-            self.MessageAreaContentLayout.addWidget(QLabel())
+            self.message_area_content_layout.addWidget(QLabel())
+            self.message_area_content_layout.addWidget(new_message)
+            self.message_area_content_layout.addWidget(QLabel())
 
         else:
             return False

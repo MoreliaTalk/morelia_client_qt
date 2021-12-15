@@ -11,8 +11,8 @@ from modules.database import models, config_models
 
 
 class ClientDb:
-    def __init__(self, URI="sqlite:db_sqlite.db"):
-        self.connection = orm.connectionForURI(URI)
+    def __init__(self, url="sqlite:db_sqlite.db"):
+        self.connection = orm.connectionForURI(url)
         orm.sqlhub.processConnection = self.connection
 
     @staticmethod
@@ -185,14 +185,6 @@ class ClientDb:
                 return models.Flow.selectBy(uuid=flow_uuid).getOne()
         except (orm.main.SQLObjectNotFound, orm.dberrors.OperationalError) as error:
             logger.error(f'Failed to find user by id, uuid: {flow_id}, {flow_uuid}. Error {error}')
-
-    def get_last_message(self, flow_uuid):
-        flow_id = self.get_flow_id_by_uuid(flow_uuid)
-        list_mes = list(self.list_messages(flow_id))
-        if len(list_mes):
-            return list_mes[-1]
-        else:
-            return None
 
     @staticmethod
     def get_param(param, default_value=""):

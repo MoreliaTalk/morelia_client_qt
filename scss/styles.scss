@@ -28,6 +28,7 @@ $invert_background_color: invert($background_color);
 
 QWidget{
     background-color: $background_color;
+    color: $background_color;
 }
 
 QMainWindow{
@@ -91,7 +92,7 @@ QMainWindow{
         border-radius: 10px;
 
         &:hover{
-            background-color: lighten($primary_color, 10%);
+            background-color: lighten($secondary_color, 10%);
         }
     }
 

@@ -128,7 +128,7 @@ class ClientDb:
     def list_messages(flow_id):
         MessageTuple = namedtuple('MessageTuple',
                                   'id uuid text time user_id user_uuid username')
-        db_query = models.Message.selectBy(flow=flow_id).orderBy("time")
+        db_query = models.Message.selectBy(flow=flow_id).orderBy("-time")
         for line in db_query:
             user = models.UserConfig.selectBy(id=line.user).getOne()
             yield MessageTuple(line.id, line.uuid, line.text, line.time,

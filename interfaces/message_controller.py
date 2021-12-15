@@ -44,12 +44,12 @@ class MessageController:
             else:
                 chat.setStyleSheet("")
 
-        list_messages = list(self.db.list_messages(
+        messages_tuple = tuple(reversed(tuple(self.db.list_messages(
             self.db.get_flow_id_by_uuid(chat_uuid)
-            ))
+        ))))
 
-        if len(list_messages):
-            for message in list_messages:
+        if len(messages_tuple):
+            for message in messages_tuple:
                 if message.user_uuid == self.db.get_param("user_uuid"):
                     self._add_message("my", message.text)
                 else:
@@ -68,25 +68,25 @@ class MessageController:
 
         logger.info("clear MessagePole")
 
-    def _add_message(self, type: str, text: str, username: str = None):
-        new_message = MessageItem(text, username)
+    def _add_message(self, mes_type: str, mes_text: str, username: str = None):
+        new_message = MessageItem(mes_text, username)
         new_message.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Minimum)
 
-        if type == "my":
+        if mes_type == "my":
             new_message.WidgetContent.setObjectName("myMessage")
 
             self.message_area_content_layout.addWidget(QLabel())
             self.message_area_content_layout.addWidget(QLabel())
             self.message_area_content_layout.addWidget(new_message)
 
-        elif type == "other_user":
+        elif mes_type == "other_user":
             new_message.WidgetContent.setObjectName("otherUserMessage")
 
             self.message_area_content_layout.addWidget(new_message)
             self.message_area_content_layout.addWidget(QLabel())
             self.message_area_content_layout.addWidget(QLabel())
 
-        elif type == "special":
+        elif mes_type == "special":
             new_message.WidgetContent.setObjectName("specialMessage")
 
             self.message_area_content_layout.addWidget(QLabel())
@@ -96,6 +96,6 @@ class MessageController:
         else:
             return False
 
-        logger.info(f"add new message type: {type} text: {text}")
+        logger.info(f"add new message type: {mes_type} text: {mes_text}")
 
         return new_message

@@ -19,11 +19,15 @@ from modules.database.models import Flow
 
 set_logger_setting()
 
+db = ClientDb()
+db.create_db()
+
 
 class MainWindow(Ui_MainWindow, QMainWindow):
     def __init__(self, app: QApplication):
         super().__init__()
         self.app = app
+        self.db = db
 
         logger.info("Start client")
 
@@ -31,7 +35,6 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.setWindowTitle("MoreliaTalk")
         self.load_font()
         self.setColorTheme()
-        self.connect_to_db()
 
         self.ChatsController = ChatsController(self.ContactsContent)
         self.MessageController = MessageController(self.db, self.ChatsController, self.MessageAreaContentLayout)
@@ -52,9 +55,6 @@ class MainWindow(Ui_MainWindow, QMainWindow):
                 lastMessageText=lastMessageText
             )
 
-    def connect_to_db(self):
-        self.db = ClientDb()
-        self.db.create_db()
 
     def load_font(self):
         fonts_dict = {

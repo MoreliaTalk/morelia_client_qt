@@ -34,7 +34,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.setupUi(self)
         self.setWindowTitle("MoreliaTalk")
         self.load_font()
-        self.setColorTheme()
+        self.set_color_theme()
 
         self.ChatsController = ChatsController(self.ContactsContent)
         self.MessageController = MessageController(self.db, self.ChatsController, self.MessageAreaContentLayout)
@@ -47,14 +47,13 @@ class MainWindow(Ui_MainWindow, QMainWindow):
     def load_flow_and_mes(self):
         list_flow: List[Flow] = self.db.list_flow()
         for flow in list_flow:
-            lastMessage = self.db.get_last_message(flow.uuid)
-            lastMessageText = lastMessage.text if lastMessage else "Здесь пока нет сообщений"
+            last_message = self.db.get_last_message(flow.uuid)
+            last_message_text = last_message.text if last_message else "Здесь пока нет сообщений"
             self.ChatsController.add_chat(
                 uuid=flow.uuid,
                 chatName=flow.title,
-                lastMessageText=lastMessageText
+                lastMessageText=last_message_text
             )
-
 
     def load_font(self):
         fonts_dict = {
@@ -76,9 +75,9 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             for font in font_family:
                 QFontDatabase.addApplicationFont(str(Path.cwd() / "fonts" / f"{font}.ttf"))
 
-    def setColorTheme(self, primary_color: str = None,
-                      secondary_color: str = None,
-                      background_color: str = None):
+    def set_color_theme(self, primary_color: str = None,
+                        secondary_color: str = None,
+                        background_color: str = None):
         self.app.setStyle("fusion")
         self.app.setFont(QFont("Roboto", 10))
 

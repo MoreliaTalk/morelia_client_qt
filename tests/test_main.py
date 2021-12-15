@@ -12,10 +12,10 @@ class TestSetColorTheme(unittest.TestCase):
         self.mainWindow = main.MainWindow()
 
     def test_standart_color_theme(self):
-        self.assertEqual(self.mainWindow.setColorTheme(), self.mainWindow.styleSheet())
+        self.assertEqual(self.mainWindow.set_color_theme(), self.mainWindow.styleSheet())
 
     def test_custom_color_theme(self):
-        self.assertEqual(self.mainWindow.setColorTheme(
+        self.assertEqual(self.mainWindow.set_color_theme(
                             primary_color="#{:06x}".format(random.randint(0, 0xFFFFFF)),
                             secondary_color="#{:06x}".format(random.randint(0, 0xFFFFFF)),
                             background_color="#{:06x}".format(random.randint(0, 0xFFFFFF))

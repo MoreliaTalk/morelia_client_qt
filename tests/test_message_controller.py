@@ -1,30 +1,32 @@
 import unittest
 import sys
-from PyQt5.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication
 
 import main
+from interfaces.message_controller import MessageItem
+from tests import lib_for_tests
 
 
 class TestAddMessage(unittest.TestCase):
-    def setUp(self):
-        self.app = QApplication(sys.argv)
-        self.mainWindow = main.MainWindow()
-
+    def setUp(self) -> None:
+        self.app = lib_for_tests.create_qapplication()
+        self.mainWindow = main.MainWindow(self.app)
+        
     def test_add_my_message(self):
-        self.assertEqual(self.mainWindow.MessageController.add_message(
-                            type="my", text="111111"
-                        ),
-                         self.mainWindow.MessageAreaContent.children()[-1])
+        message = self.mainWindow.MessageController._add_message(
+            mes_type="my", mes_text="111111"
+        )
+        self.assertEqual(message, self.mainWindow.MessageAreaContent.findChildren(MessageItem)[-1])
 
     def test_add_other_user_message(self):
-        self.assertEqual(self.mainWindow.MessageController.add_message(
-                            type="other_user", text="111111"
-                        ),
-                         self.mainWindow.MessageAreaContent.children()[-2])
+        message = self.mainWindow.MessageController._add_message(
+            mes_type="other_user", mes_text="111111"
+        )
+        self.assertEqual(message, self.mainWindow.MessageAreaContent.findChildren(MessageItem)[-1])
 
-    def test_add_not_correct_type_message(self):
-        self.assertFalse(self.mainWindow.MessageController.add_message(
-                            type=")))", text="111111"
+    def test_add_not_correct_mes_type_message(self):
+        self.assertFalse(self.mainWindow.MessageController._add_message(
+                            mes_type=")))", mes_text="111111"
                         ))
 
 

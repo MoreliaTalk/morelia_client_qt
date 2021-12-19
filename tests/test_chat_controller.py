@@ -12,7 +12,7 @@ class TestChatItem(unittest.TestCase):
         self.app = lib_for_tests.create_qapplication()
         self.mainWindow = main.MainWindow(self.app)
 
-    def test_add_chat_nikname(self):
+    def test_add_chat_nickname(self):
         count = self.mainWindow.ContactsContent.count() + 1
         self.mainWindow.ChatsController.add_chat(
             "1", "Vasya", "Hello!"

@@ -18,9 +18,15 @@ class TestAddMessage(unittest.TestCase):
         )
         self.assertEqual(message, self.mainWindow.MessageAreaContent.findChildren(MessageItem)[-1])
 
-    def test_add_other_user_message(self):
+    def test_add_other_user_message_without_username(self):
         message = self.mainWindow.MessageController._add_message(
             mes_type="other_user", mes_text="111111"
+        )
+        self.assertEqual(message, self.mainWindow.MessageAreaContent.findChildren(MessageItem)[-1])
+
+    def test_add_other_user_message_with_username(self):
+        message = self.mainWindow.MessageController._add_message(
+            mes_type="other_user", mes_text="111111", username="Vasya"
         )
         self.assertEqual(message, self.mainWindow.MessageAreaContent.findChildren(MessageItem)[-1])
 

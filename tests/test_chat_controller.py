@@ -1,11 +1,13 @@
 import unittest
 from PIL import Image
+from PySide6.QtTest import QTest
+from PySide6 import QtCore
 
 import main
 from tests import lib_for_tests
 
 
-class TestAddChatItem(unittest.TestCase):
+class TestChatItem(unittest.TestCase):
     def setUp(self) -> None:
         self.app = lib_for_tests.create_qapplication()
         self.mainWindow = main.MainWindow(self.app)
@@ -72,6 +74,28 @@ class TestAddChatItem(unittest.TestCase):
             "Hello!"
         )
         self.assertEqual(self.mainWindow.ContactsContent.count(), count)
+
+    def test_add_chat_blank_name(self):
+        self.mainWindow.ChatsController.add_chat(
+            uuid="1",
+            chatName="",
+            lastMessageText="Hello!",
+        )
+
+    def test_click_on_chat(self):
+        def func_connected_to_signal(chat):
+            with self.subTest(chat):
+                self.assertIsNotNone(chat)
+
+        new_chat = self.mainWindow.ChatsController.add_chat(
+            uuid="1",
+            chatName="Vasya Pupkin",
+
+            lastMessageText="Hello!"
+        )
+
+        self.mainWindow.ChatsController.signals.selected_chat.connect(func_connected_to_signal)
+        QTest.mouseClick(new_chat, QtCore.Qt.MouseButton.LeftButton)
 
 
 if __name__ == "__main__":

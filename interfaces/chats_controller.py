@@ -81,8 +81,11 @@ class ChatsController:
         self.list_chats: list[ChatItem] = list()
         self.signals = self.ChatsSignals()
 
-    def add_chat(self, uuid: str, chatName: str, lastMessageText: str, image: Image.Image = None):
+    def add_chat(self, uuid: str, chatName: str, lastMessageText: str, image: Image.Image = None) -> ChatItem:
         new_chat_item = ChatItem(self.signals, uuid, chatName, lastMessageText, image)
         self.list_chats.append(new_chat_item)
         self.ChatsContentLayout.addWidget(new_chat_item)
+
         logger.info(f"add new chat(chatName {chatName}, lastMessageText: {lastMessageText})")
+
+        return new_chat_item

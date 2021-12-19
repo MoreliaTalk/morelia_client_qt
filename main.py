@@ -49,7 +49,8 @@ class MainWindow(Ui_MainWindow, QMainWindow):
                 lastMessageText=last_message_text
             )
 
-    def load_font(self):
+    @staticmethod
+    def load_font():
         fonts_dict = {
             "Roboto": (
                 "Black",

@@ -8,6 +8,3 @@ def create_qapplication():
         return QApplication.instance()
     else:
         return QApplication(sys.argv)
-
-
-

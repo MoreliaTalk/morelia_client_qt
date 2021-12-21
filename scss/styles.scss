@@ -9,17 +9,26 @@ $invert_background_color: invert($background_color);
     border-radius: 15px;
     margin: 0px;
 
+    QWidget{
+        background: none;
+    }
+
     @if ($type == "my"){
         background-color: $primary_color;
         border-bottom-right-radius: 5px;
     } @else if ($type == "other_user"){
         background-color: $secondary_color;
         border-bottom-left-radius: 5px;
+    } @else if ($type == "special"){
+        background-color: lighten(mix($primary_color, $secondary_color, 50%), 10%);
+        padding: 5px;
+        border-radius: 10px;
     }
 }
 
 QWidget{
     background-color: $background_color;
+    color: $background_color;
 }
 
 QMainWindow{
@@ -31,12 +40,16 @@ QMainWindow{
     }
     */
 
-    QLabel#myMessage{
+    QWidget#myMessage{
         @include Message("my")
     }
 
-    QLabel#otherUserMessage{
+    QWidget#otherUserMessage{
         @include Message("other_user")
+    }
+
+    QWidget#specialMessage{
+        @include Message("special")
     }
     
     QScrollArea#MessageArea{
@@ -79,30 +92,40 @@ QMainWindow{
         border-radius: 10px;
 
         &:hover{
-            background-color: lighten($primary_color, 10%);
+            background-color: lighten($secondary_color, 10%);
         }
-    }
-
-    QLabel#ContactAvatar{
-    	border-radius: 20px;
-    	background-clip: border; 
-    	color: $invert_background_color; 
-    	font: 12pt;
-        font-weight: bold;
-    }                                      
-
-    QLabel#ChatLastMessageLabel{
-        color: $invert_background_color;
-    }                                      
-
-    QLabel#ChatNameLabel{
-        color: $invert_background_color;
-        font-weight: bold;
     }
 
     QScrollArea#ChatListArea{
         border: 1.5px solid $primary_color;
         border-radius: 10px;
         padding: 1.5px;
+    }
+
+    QWidget#ContactCardContent{
+        QWidget{
+            background: none;
+        }
+
+        &:hover{
+            background-color: lighten($background_color, 10);
+        }
+
+        QLabel#ContactAvatar{
+            border-radius: 20px;
+            background-clip: border; 
+            color: $invert_background_color; 
+            font: 12pt;
+            font-weight: bold;
+        }                                      
+    
+        QLabel#ChatLastMessageLabel{
+            color: $invert_background_color;
+        }                                      
+    
+        QLabel#ChatNameLabel{
+            color: $invert_background_color;
+            font-weight: bold;
+        }
     }
 }    

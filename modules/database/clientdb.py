@@ -1,17 +1,17 @@
-import sys
 import inspect
+import sys
 from collections import namedtuple
 from operator import attrgetter
-from loguru import logger
 
 import sqlobject as orm
+from loguru import logger
 
 from modules.database import models, config_models
 
 
 class ClientDb:
-    def __init__(self, URI="sqlite:db_sqlite.db"):
-        self.connection = orm.connectionForURI(URI)
+    def __init__(self, url="sqlite:db_sqlite.db"):
+        self.connection = orm.connectionForURI(url)
         orm.sqlhub.processConnection = self.connection
 
     @staticmethod
@@ -123,11 +123,18 @@ class ClientDb:
         for line in sorted(list_flow, key=attrgetter('last_time'), reverse=True):
             yield line
 
-    @staticmethod
-    def list_messages(flow_id):
+    def list_messages(self, flow_id=None, flow_uuid=None):
+        current_flow_id = str()
+        if flow_id and flow_uuid:
+            current_flow_id = flow_id
+        elif flow_uuid:
+            current_flow_id = self.get_flow_id_by_uuid(flow_uuid)
+        elif flow_id:
+            current_flow_id = flow_id
+
         MessageTuple = namedtuple('MessageTuple',
                                   'id uuid text time user_id user_uuid username')
-        db_query = models.Message.selectBy(flow=flow_id).orderBy("-time")
+        db_query = models.Message.selectBy(flow=current_flow_id).orderBy("time")
         for line in db_query:
             user = models.UserConfig.selectBy(id=line.user).getOne()
             yield MessageTuple(line.id, line.uuid, line.text, line.time,

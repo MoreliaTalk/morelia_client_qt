@@ -1,11 +1,10 @@
-import sys
 import inspect
+import sys
 from collections import namedtuple
 from operator import attrgetter
-import uuid
-from loguru import logger
 
 import sqlobject as orm
+from loguru import logger
 
 from modules.database import models, config_models
 

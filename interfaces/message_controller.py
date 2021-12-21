@@ -44,9 +44,8 @@ class MessageController:
             else:
                 chat.setStyleSheet("")
 
-        messages_tuple = tuple(reversed(tuple(self.db.list_messages(
-            self.db.get_flow_id_by_uuid(chat_uuid)
-        ))))
+        messages_tuple = list(self.db.list_messages(flow_uuid=chat_uuid))
+        messages_tuple.reverse()
 
         if len(messages_tuple):
             for message in messages_tuple:

@@ -63,6 +63,9 @@ class MessageController:
         messages = self.message_area_content_layout.parentWidget().findChildren(MessageItem)
         for mes in messages:
             mes.deleteLater()
+        labels = self.message_area_content_layout.parentWidget().findChildren(QLabel)
+        for item in labels:
+            item.deleteLater()
 
         logger.info("clear MessagePole")
 

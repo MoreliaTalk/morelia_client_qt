@@ -1,6 +1,7 @@
+from collections import namedtuple
 from os import path
 from pathlib import Path
-from PySide6.QtGui import QFont, QFontDatabase
+from PySide6.QtGui import QFont, QFontDatabase, QShortcut, QKeySequence
 import sass
 
 from PySide6.QtWidgets import QApplication, QDialog
@@ -11,17 +12,60 @@ from loguru import logger
 from modules.logging import set_logger_setting
 
 
+set_logger_setting()
+
+
 class LoginDialog(Ui_loginDialog, QDialog):
     def __init__(self, app: QApplication):
         super().__init__()
         self.app = app
 
+        self.action = "Cancel"
         logger.info("Login dialog")
 
         self.setupUi(self)
         self.load_font()
         self.set_color_theme()
+        self.cancelPushButton.clicked.connect(self.cancel_form)
+        self.okPushButton.clicked.connect(self.accept_form)
+        self.shortcut = QShortcut(QKeySequence("Esc"), self)
+        self.shortcut.activated.connect(self.cancel_form)
 
+    def cancel_form(self):
+        self.close()
+
+    def accept_form(self):
+        if self.loginTabWidget.currentWidget().objectName() == "signInTab":
+            if self.loginLineEdit.text() == "":
+                self.loginLineEdit.setStyleSheet("background: red")
+            elif self.passwordLineEdit.text() == "":
+                self.passwordLineEdit.setStyleSheet("background: red")
+            else:
+                self.action = "Login"
+                self.close()
+        if self.loginTabWidget.currentWidget().objectName() == "registerTab":
+            if self.loginNameLineEdit.text() == "":
+                self.loginNameLineEdit.setStyleSheet("background: red")
+            elif self.passwordRegisterLineEdit.text() == "":
+                self.passwordRegisterLineEdit.setStyleSheet("background: red")
+            elif self.displayNameLineEdit.text() == "":
+                self.displayNameLineEdit.setStyleSheet("background: red")
+            elif self.eMailLineEdit.text() == "":
+                self.eMailLineEdit.setStyleSheet("background: red")
+            else:
+                self.action = "Register"
+                self.close()
+
+    def return_result(self):
+        Result = namedtuple("Result", "action login password username email")
+        if self.action == "Login":
+            return Result(self.action, self.loginLineEdit.text(), self.passwordLineEdit.text(),
+                          "", "")
+        elif self.action == "Register":
+            return Result(self.action, self.loginNameLineEdit.text(), self.passwordRegisterLineEdit.text(),
+                          self.displayNameLineEdit.text(), self.eMailLineEdit.text())
+        else:
+            return Result(self.action, "", "", "", "")
 
     @staticmethod
     def load_font():

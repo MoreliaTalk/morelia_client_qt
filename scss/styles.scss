@@ -104,6 +104,7 @@ QMainWindow{
             border: 1.5px solid $primary_color;
             border-radius: 5px;
             padding: 1.5px;
+            color: $invert_background_color;
         }
         QLineEdit#SearchLineEdit{
             border: 1.5px solid $primary_color;

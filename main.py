@@ -1,6 +1,10 @@
 from os import path
 from pathlib import Path
-from PySide6.QtGui import QFont, QFontDatabase
+
+from PIL.ImageQt import ImageQt
+from PIL import Image
+from PySide6.QtCore import QSize
+from PySide6.QtGui import QFont, QFontDatabase, QPixmap, QIcon, QImage
 import sass
 
 from PySide6.QtWidgets import QApplication, QMainWindow
@@ -75,6 +79,10 @@ class MainWindow(Ui_MainWindow, QMainWindow):
                         background_color: str = None):
         self.app.setStyle("fusion")
         self.app.setFont(QFont("Roboto", 10))
+
+        self.MenuButton.setIcon(QIcon(
+            "./icons/menu-line.png"
+        ))
 
         file = open(path.join("scss", "styles.scss"), "r")
         text_css = file.read()

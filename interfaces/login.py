@@ -55,18 +55,24 @@ class LoginDialog(Ui_loginDialog, QDialog):
                 self.action = "Login"
                 self.close()
         if self.loginTabWidget.currentWidget().objectName() == "registerTab":
-            if is_filled(self.loginNameLineEdit) and is_filled(self.passwordRegisterLineEdit) and is_filled(self.displayNameLineEdit) and is_filled(self.eMailLineEdit):
+            if is_filled(self.loginNameLineEdit) and \
+                    is_filled(self.passwordRegisterLineEdit) and \
+                    is_filled(self.displayNameLineEdit) and \
+                    is_filled(self.eMailLineEdit):
                 self.action = "Register"
                 self.close()
 
     def return_result(self):
         Result = namedtuple("Result", "action login password username email")
         if self.action == "Login":
-            return Result(self.action, self.loginLineEdit.text(), self.passwordLineEdit.text(),
+            return Result(self.action, self.loginLineEdit.text(),
+                          self.passwordLineEdit.text(),
                           "", "")
         elif self.action == "Register":
-            return Result(self.action, self.loginNameLineEdit.text(), self.passwordRegisterLineEdit.text(),
-                          self.displayNameLineEdit.text(), self.eMailLineEdit.text())
+            return Result(self.action, self.loginNameLineEdit.text(),
+                          self.passwordRegisterLineEdit.text(),
+                          self.displayNameLineEdit.text(),
+                          self.eMailLineEdit.text())
         else:
             return Result(self.action, "", "", "", "")
 

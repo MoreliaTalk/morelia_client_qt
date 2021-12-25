@@ -139,6 +139,10 @@ QWidget#signInTab, QWidget#registerTab{
         color: $invert_background_color;
     }
 
+    QLineEdit[wrongInput="true"]{
+        border: 1.5px solid red;
+    }
+
     QCheckBox{
             background-color: $primary_color;
             color: invert($primary_color); 

@@ -15,6 +15,23 @@ from modules.logging import set_logger_setting
 set_logger_setting()
 
 
+def is_filled(line_edit):
+    if line_edit.text() == "":
+        line_edit.setProperty("wrongInput", True)
+        redraw_widget(line_edit)
+        return False
+    else:
+        line_edit.setProperty("wrongInput", False)
+        redraw_widget(line_edit)
+        return True
+
+
+def redraw_widget(widget):
+    widget.style().unpolish(widget)
+    widget.style().polish(widget)
+    widget.update()
+
+
 class LoginDialog(Ui_loginDialog, QDialog):
     def __init__(self, app: QApplication):
         super().__init__()
@@ -36,23 +53,11 @@ class LoginDialog(Ui_loginDialog, QDialog):
 
     def accept_form(self):
         if self.loginTabWidget.currentWidget().objectName() == "signInTab":
-            if self.loginLineEdit.text() == "":
-                self.loginLineEdit.setStyleSheet("background: red")
-            elif self.passwordLineEdit.text() == "":
-                self.passwordLineEdit.setStyleSheet("background: red")
-            else:
+            if is_filled(self.loginLineEdit) and is_filled(self.passwordLineEdit):
                 self.action = "Login"
                 self.close()
         if self.loginTabWidget.currentWidget().objectName() == "registerTab":
-            if self.loginNameLineEdit.text() == "":
-                self.loginNameLineEdit.setStyleSheet("background: red")
-            elif self.passwordRegisterLineEdit.text() == "":
-                self.passwordRegisterLineEdit.setStyleSheet("background: red")
-            elif self.displayNameLineEdit.text() == "":
-                self.displayNameLineEdit.setStyleSheet("background: red")
-            elif self.eMailLineEdit.text() == "":
-                self.eMailLineEdit.setStyleSheet("background: red")
-            else:
+            if is_filled(self.loginNameLineEdit) and is_filled(self.passwordRegisterLineEdit) and is_filled(self.displayNameLineEdit) and is_filled(self.eMailLineEdit):
                 self.action = "Register"
                 self.close()
 

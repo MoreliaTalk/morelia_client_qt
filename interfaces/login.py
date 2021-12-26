@@ -22,12 +22,13 @@ def is_filled(line_edit: QLineEdit) -> bool:
     return: bool
         Is text property filled
     """
+    PARAM_NAME = "wrongInput"
     if line_edit.text() == "":
-        line_edit.setProperty("wrongInput", True)
+        line_edit.setProperty(PARAM_NAME, True)
         redraw_widget(line_edit)
         return False
     else:
-        line_edit.setProperty("wrongInput", False)
+        line_edit.setProperty(PARAM_NAME, False)
         redraw_widget(line_edit)
         return True
 

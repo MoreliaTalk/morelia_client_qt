@@ -1,3 +1,4 @@
+import os
 from os import path
 from pathlib import Path
 
@@ -55,24 +56,9 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
     @staticmethod
     def load_font():
-        fonts_dict = {
-            "Roboto": (
-                "Black",
-                "BlackItalic",
-                "Bold",
-                "BoldItalic",
-                "Italic",
-                "Light",
-                "LightItalic",
-                "Medium",
-                "Regular",
-                "Thin",
-                "ThinItalic"
-            )
-        }
-        for font_family in fonts_dict:
-            for font in font_family:
-                QFontDatabase.addApplicationFont(str(Path.cwd() / "fonts" / f"{font}.ttf"))
+        fonts_list = tuple(os.walk(Path.cwd() / "fonts"))[0][-1]
+        for font in fonts_list:
+            QFontDatabase.addApplicationFont(str(Path.cwd() / "fonts" / font))
 
     def set_color_theme(self, primary_color: str = None,
                         secondary_color: str = None,

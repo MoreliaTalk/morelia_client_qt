@@ -82,10 +82,10 @@ class LoginDialog(Ui_loginDialog, QDialog):
         return:
             Result: namedtuple
                 .action = ("Cancel", "Login", "Register")
-                .login: string login name
-                .password: string
-                .username: string Real name or display name
-                .email: string
+                .login: string login name (Register and Login mode)
+                .password: string (Register and Login mode)
+                .username: string Real name or display name (only in Register mode)
+                .email: string (only in Register mode)
         """
         Result = namedtuple("Result", "action login password username email")
         if self.action == "Login":

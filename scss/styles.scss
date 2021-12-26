@@ -26,6 +26,13 @@ $invert_background_color: invert($background_color);
     }
 }
 
+@mixin BorderedArea($border_color){
+    border: 1.5px solid $border_color;
+    border-radius: 10px;
+    padding: 1.5px;
+    color: $invert_background_color;
+}
+
 QWidget{
     background-color: $background_color;
     color: $background_color;
@@ -78,12 +85,7 @@ QMainWindow{
     }
 
     QTextEdit#InputText{
-        border: 1.5px solid $primary_color;
-        border-radius: 10px;
-
-        padding: 1.5px;
-
-        color: $invert_background_color;
+        @include BorderedArea($primary_color)
     }
 
     QPushButton#SendButton{
@@ -97,27 +99,18 @@ QMainWindow{
     }
 
     QWidget#MenuAndSearchWidget{
-        border: 1.5px solid $secondary_color;
-        border-radius: 10px;
-        padding: 1.5px;
         QToolButton#MenuButton{
-            border: 1.5px solid $primary_color;
+            @include BorderedArea($secondary_color);
             border-radius: 5px;
-            padding: 1.5px;
-            color: $invert_background_color;
         }
         QLineEdit#SearchLineEdit{
-            border: 1.5px solid $primary_color;
+            @include BorderedArea($secondary_color);
             border-radius: 5px;
-            padding: 1.5px;
-            color: $invert_background_color;
         }
     }
 
     QScrollArea#ChatListArea{
-        border: 1.5px solid $primary_color;
-        border-radius: 10px;
-        padding: 1.5px;
+        @include BorderedArea($primary_color);
     }
 
     QWidget#ContactCardContent{

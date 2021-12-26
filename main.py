@@ -87,7 +87,6 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         file = open(path.join("scss", "styles.scss"), "r")
         text_css = file.read()
         file.close()
-
         custom_theme = False
 
         if primary_color:

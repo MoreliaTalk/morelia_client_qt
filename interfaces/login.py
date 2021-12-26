@@ -31,7 +31,7 @@ def redraw_widget(widget):
 
 
 class LoginDialog(Ui_loginDialog, QDialog):
-    def __init__(self, app: QApplication):
+    def __init__(self, app: QApplication, login="", password=""):
         super().__init__()
         self.app = app
 
@@ -41,6 +41,8 @@ class LoginDialog(Ui_loginDialog, QDialog):
         self.setupUi(self)
         load_font()
         set_color_theme(self)
+        self.loginLineEdit.setText(login)
+        self.passwordLineEdit.setText(password)
         self.cancelPushButton.clicked.connect(self.cancel_form)
         self.okPushButton.clicked.connect(self.accept_form)
         self.shortcut = QShortcut(QKeySequence("Esc"), self)

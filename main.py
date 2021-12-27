@@ -15,6 +15,8 @@ from interfaces.chats_controller import ChatsController
 from interfaces.message_controller import MessageController
 
 from loguru import logger
+
+from interfaces.settings_controller import SettingsDialog
 from modules.logging import set_logger_setting
 from modules.database.clientdb import ClientDb
 
@@ -43,6 +45,10 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.ChatsController.signals.selected_chat.connect(
             lambda chat: self.MessageController.load_messages_current_chat(chat.uuid)
         )
+
+        self.SettingsDialog = SettingsDialog()
+        self.MenuButton.clicked.connect(self.SettingsDialog.exec)
+
 
     def load_flow_and_mes(self):
         list_flow = self.db.list_flow()

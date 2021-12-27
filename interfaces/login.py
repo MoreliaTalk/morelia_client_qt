@@ -1,3 +1,4 @@
+import sys
 from collections import namedtuple
 from PySide6.QtGui import QShortcut, QKeySequence
 
@@ -53,8 +54,8 @@ class LoginDialog(Ui_loginDialog, QDialog):
         logger.info("Login dialog")
 
         self.setupUi(self)
-        load_font()
-        set_color_theme(self)
+#        load_font()
+#        set_color_theme(self)
         self.loginLineEdit.setText(login)
         self.passwordLineEdit.setText(password)
         self.cancelPushButton.clicked.connect(self.cancel_form)
@@ -101,3 +102,9 @@ class LoginDialog(Ui_loginDialog, QDialog):
         else:
             return Result(self.action, "", "", "", "")
 
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    login = LoginDialog(app)
+    login.exec()
+    logger.info("Dialog result: "+login.return_result().action)

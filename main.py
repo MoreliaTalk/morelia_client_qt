@@ -46,7 +46,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             lambda chat: self.MessageController.load_messages_current_chat(chat.uuid)
         )
 
-        self.SettingsDialog = SettingsDialog()
+        self.SettingsDialog = SettingsDialog(self)
         self.MenuButton.clicked.connect(self.SettingsDialog.exec)
 
 

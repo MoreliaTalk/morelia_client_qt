@@ -54,8 +54,8 @@ class LoginDialog(Ui_loginDialog, QDialog):
         logger.info("Login dialog")
 
         self.setupUi(self)
-#        load_font()
-#        set_color_theme(self)
+        load_font()
+        set_color_theme(self)
         self.loginLineEdit.setText(login)
         self.passwordLineEdit.setText(password)
         self.cancelPushButton.clicked.connect(self.cancel_form)

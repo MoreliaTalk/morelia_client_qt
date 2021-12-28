@@ -16,7 +16,7 @@ from interfaces.message_controller import MessageController
 
 from loguru import logger
 
-from interfaces.settings_controller import SettingsDialog
+from interfaces.settings_dialog import SettingsDialog
 from modules.logging import set_logger_setting
 from modules.database.clientdb import ClientDb
 

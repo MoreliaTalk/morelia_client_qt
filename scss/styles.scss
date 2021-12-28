@@ -139,4 +139,9 @@ QMainWindow{
             font-weight: bold;
         }
     }
+    QDialog{
+        QLabel{
+            color: $invert_background_color;
+        }
+    }
 }    

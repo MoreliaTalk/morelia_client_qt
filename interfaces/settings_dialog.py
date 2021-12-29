@@ -1,7 +1,7 @@
 import sys
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QDialog, QMainWindow, QWidget, QHBoxLayout, QLabel
+from PySide6.QtWidgets import QDialog, QMainWindow, QWidget, QPushButton
 
 from interfaces.raw.setting_card import Ui_SettingCard
 from interfaces.raw.settings_dialog import Ui_SettingsDialog
@@ -46,4 +46,8 @@ class SettingsDialog(Ui_SettingsDialog, QDialog):
             new_widget = SettingItem()
             new_widget.label.setText(setting.name)
 
+            if setting.type == "button":
+                set_widget = QPushButton("Редактировать")
+
+            new_widget.horizontalLayout.addWidget(set_widget)
             self.SettingsAreaLayout.addWidget(new_widget)

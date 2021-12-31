@@ -2,7 +2,7 @@ import sys
 from collections import namedtuple
 
 from PySide6.QtCore import Qt, QMetaObject, QCoreApplication
-from PySide6.QtWidgets import QDialog, QMainWindow, QWidget, QPushButton
+from PySide6.QtWidgets import QDialog, QMainWindow, QWidget, QPushButton, QGridLayout
 
 from interfaces.raw.setting_card import Ui_SettingCard
 from interfaces.raw.settings_dialog import Ui_SettingsDialog
@@ -47,6 +47,14 @@ class SettingsDialog(Ui_SettingsDialog, QDialog):
             self.SettingsAreaLayout.addWidget(new_widget)
 
     def setting_color_theme(self):
-        a = QDialog()
+        new_dialog = QDialog()
+        new_dialog.setWindowTitle("Change Color Theme")
+        new_dialog.resize(300, 100)
 
-        a.exec()
+        new_dialog.setParent(self, Qt.Window)
+        new_layout = QGridLayout()
+        new_dialog.setLayout(new_layout)
+
+        new_layout.addWidget(QPushButton())
+
+        new_dialog.exec()

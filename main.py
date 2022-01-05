@@ -54,7 +54,6 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
         self.MenuButton.clicked.connect(self.SettingsDialog.exec)
 
-
     def load_flow_and_mes(self):
         list_flow = self.db.list_flow()
         for flow in list_flow:

@@ -71,7 +71,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         for font in fonts_list:
             QFontDatabase.addApplicationFont(str(Path.cwd() / "fonts" / font))
 
-    def set_style_theme(self):
+    def set_color_theme(self):
         DEFAULT_PRIMARY_COLOR = "#00ff00"
         DEFAULT_SECONDARY_COLOR = "#fde910"
         DEFAULT_BACKGROUND_COLOR = "#161616"
@@ -83,38 +83,27 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             "./icons/menu-line.png"
         ))
 
-        if pri_param := self.db.get_param("primary_color"):
-            primary_color = pri_param
-        else:
-            self.db.set_param("primary_color", DEFAULT_PRIMARY_COLOR)
-            primary_color = DEFAULT_PRIMARY_COLOR
-
-        if sec_param := self.db.get_param("secondary_color"):
-            secondary_color = sec_param
-        else:
-            self.db.set_param("secondary_color", DEFAULT_SECONDARY_COLOR)
-            secondary_color = DEFAULT_SECONDARY_COLOR
-
-        if back_param := self.db.get_param("background_color"):
-            background_color = back_param
-        else:
-            self.db.set_param("background_color", DEFAULT_BACKGROUND_COLOR)
-            background_color = DEFAULT_BACKGROUND_COLOR
-
         file = open(path.join("scss", "styles.scss"), "r")
         text_css = file.read()
         file.close()
-        
-        text_css = text_css.replace(DEFAULT_PRIMARY_COLOR, primary_color)
-        text_css = text_css.replace(DEFAULT_SECONDARY_COLOR, secondary_color)
-        text_css = text_css.replace(DEFAULT_BACKGROUND_COLOR, background_color)
+
+        if primary_color := self.db.get_param("primary_color"):
+            text_css = text_css.replace(DEFAULT_PRIMARY_COLOR, primary_color)
+        else:
+            self.db.set_param("primary_color", DEFAULT_PRIMARY_COLOR)
+
+        if secondary_color := self.db.get_param("secondary_color"):
+            text_css = text_css.replace(DEFAULT_SECONDARY_COLOR, secondary_color)
+        else:
+            self.db.set_param("secondary_color", DEFAULT_SECONDARY_COLOR)
+
+        if background_color := self.db.get_param("background_color"):
+            text_css = text_css.replace(DEFAULT_BACKGROUND_COLOR, background_color)
+        else:
+            self.db.set_param("background_color", DEFAULT_BACKGROUND_COLOR)
 
         text_css = sass.compile(string=text_css)
         self.setStyleSheet(text_css)
-
         logger.info("set color theme")
-        logger.info(f"primary color: {primary_color}")
-        logger.info(f"secondary color: {secondary_color}")
-        logger.info(f"background color: {background_color}")
 
         return text_css

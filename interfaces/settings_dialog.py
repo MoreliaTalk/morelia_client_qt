@@ -6,6 +6,7 @@ from NekrodWidgets import ColorSelectButton
 
 from interfaces.raw.setting_card import Ui_SettingCard
 from interfaces.raw.settings_dialog import Ui_SettingsDialog
+from modules.database.clientdb import ClientDb
 
 
 class SettingItem(Ui_SettingCard, QWidget):
@@ -16,12 +17,14 @@ class SettingItem(Ui_SettingCard, QWidget):
 
 
 class SettingsDialog(Ui_SettingsDialog, QDialog):
-    def __init__(self, parent: QMainWindow):
+    def __init__(self, parent: QMainWindow, db: ClientDb):
         super(SettingsDialog, self).__init__()
 
         self.setupUi(self)
         self.setParent(parent, Qt.Window)
         self.setWindowTitle("Settings")
+
+        self.db = db
 
         SettingListItem = namedtuple("SettingsListItem", "name type method")
         self.SETTINGS_LIST = [
@@ -57,13 +60,13 @@ class SettingsDialog(Ui_SettingsDialog, QDialog):
         new_dialog.setLayout(new_layout)
 
         primary_label = QLabel("Основной цвет")
-        primary_button = ColorSelectButton()
+        primary_button = ColorSelectButton(self.db.get_param("primary_color"))
 
         secondary_label = QLabel("Дополнительный цвет")
-        secondary_button = ColorSelectButton()
+        secondary_button = ColorSelectButton(self.db.get_param("secondary_color"))
 
         background_label = QLabel("Цвет фона")
-        background_button = ColorSelectButton()
+        background_button = ColorSelectButton(self.db.get_param("background_color"))
 
         new_layout.addWidget(primary_label, 0, 0)
         new_layout.addWidget(primary_button, 1, 0)
@@ -75,3 +78,7 @@ class SettingsDialog(Ui_SettingsDialog, QDialog):
         new_layout.addWidget(background_button, 1, 2)
 
         new_dialog.exec()
+
+        self.db.set_param("primary_color", primary_button.color.name())
+        self.db.set_param("secondary_color", secondary_button.color.name())
+        self.db.set_param("background_color", background_button.color.name())

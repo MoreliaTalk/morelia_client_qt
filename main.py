@@ -33,10 +33,20 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.setupUi(self)
         self.setWindowTitle("MoreliaTalk")
         self.load_font()
-        self.set_color_theme()
 
         self.db = ClientDb()
         self.db.create_db()
+
+        primary_color = pri_col_db if (pri_col_db := self.db.get_param("primary_color")) else "#00ff00"
+        secondary_color = sec_col_db if (sec_col_db := self.db.get_param("secondary_color")) else "#fde910"
+        background_color = back_col_db if (back_col_db := self.db.get_param("background_color")) else "#161616"
+
+        self.db.set_param("primary_color", primary_color)
+        self.db.set_param("secondary_color", secondary_color)
+        self.db.set_param("background_color", background_color)
+
+        self.set_color_theme(primary_color, secondary_color, background_color)
+
 
         self.ChatsController = ChatsController(self.ContactsContent)
         self.MessageController = MessageController(self.db, self.ChatsController, self.MessageAreaContentLayout)
@@ -46,7 +56,11 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             lambda chat: self.MessageController.load_messages_current_chat(chat.uuid)
         )
 
-        self.SettingsDialog = SettingsDialog(self)
+        self.SettingsDialog = SettingsDialog(
+            parent=self,
+            db=self.db
+        )
+
         self.MenuButton.clicked.connect(self.SettingsDialog.exec)
 
 

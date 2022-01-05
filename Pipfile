@@ -13,7 +13,7 @@ loguru = "==0.5.3"
 pillow = "==8.4.0"
 SQLObject = "==3.8.0"
 click = "==7.1.2"
-nekrodwidgets = "==0.0.3.3"
+nekrodwidgets = "==0.0.3.4"
 
 [dev-packages]
 flake8 = "==4.0.1"

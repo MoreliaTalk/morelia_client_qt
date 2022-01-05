@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b02e459adef6de60a9dd7709746fc7747805e252573804c3cc8a17d3c83c4a89"
+            "sha256": "c36d01e36a0986120c5e22b1bf43dacbcb4fd81a22f1770087bc8aac1f034ac6"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -86,11 +86,11 @@
         },
         "nekrodwidgets": {
             "hashes": [
-                "sha256:026ed7ed737abb06a396eeff60fea62a8d0a21ddb67e0299095c522e36fc979b",
-                "sha256:4ad8b7c45b5352ffaf16ad22dbcb75710393ed052893b11b386c105738ce38e8"
+                "sha256:877101c19bcb6a68274161ff3df25af80f52522f3e4776ee56f4e53c64cf8131",
+                "sha256:87db01fb86240eecfb4891abca339bbfb26666a1c6034740491c5c6d61682604"
             ],
             "index": "pypi",
-            "version": "==0.0.3.3"
+            "version": "==0.0.3.4"
         },
         "pillow": {
             "hashes": [

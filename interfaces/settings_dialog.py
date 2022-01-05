@@ -1,8 +1,8 @@
-import sys
 from collections import namedtuple
 
-from PySide6.QtCore import Qt, QMetaObject, QCoreApplication
-from PySide6.QtWidgets import QDialog, QMainWindow, QWidget, QPushButton, QGridLayout
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QDialog, QMainWindow, QWidget, QPushButton, QGridLayout, QLabel
+from NekrodWidgets import ColorSelectButton
 
 from interfaces.raw.setting_card import Ui_SettingCard
 from interfaces.raw.settings_dialog import Ui_SettingsDialog
@@ -41,6 +41,7 @@ class SettingsDialog(Ui_SettingsDialog, QDialog):
 
             if setting.type == "button":
                 set_widget = QPushButton("Редактировать")
+                set_widget.setObjectName("submenu")
                 set_widget.clicked.connect(setting.method)
 
             new_widget.horizontalLayout.addWidget(set_widget)
@@ -55,6 +56,22 @@ class SettingsDialog(Ui_SettingsDialog, QDialog):
         new_layout = QGridLayout()
         new_dialog.setLayout(new_layout)
 
-        new_layout.addWidget(QPushButton())
+        primary_label = QLabel("Основной цвет")
+        primary_button = ColorSelectButton()
+
+        secondary_label = QLabel("Дополнительный цвет")
+        secondary_button = ColorSelectButton()
+
+        background_label = QLabel("Цвет фона")
+        background_button = ColorSelectButton()
+
+        new_layout.addWidget(primary_label, 0, 0)
+        new_layout.addWidget(primary_button, 1, 0)
+
+        new_layout.addWidget(secondary_label, 0, 1)
+        new_layout.addWidget(secondary_button, 1, 1)
+
+        new_layout.addWidget(background_label, 0, 2)
+        new_layout.addWidget(background_button, 1, 2)
 
         new_dialog.exec()

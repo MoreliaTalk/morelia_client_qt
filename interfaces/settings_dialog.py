@@ -1,7 +1,8 @@
 from collections import namedtuple
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QDialog, QMainWindow, QWidget, QPushButton, QGridLayout, QLabel
+from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QDialog, QMainWindow, QWidget, QPushButton, QGridLayout, QLabel, QDialogButtonBox
 from NekrodWidgets import ColorSelectButton
 
 from interfaces.raw.setting_card import Ui_SettingCard
@@ -53,7 +54,7 @@ class SettingsDialog(Ui_SettingsDialog, QDialog):
     def setting_color_theme(self):
         new_dialog = QDialog()
         new_dialog.setWindowTitle("Change Color Theme")
-        new_dialog.resize(300, 100)
+        new_dialog.resize(300, 130)
 
         new_dialog.setParent(self, Qt.Window)
         new_layout = QGridLayout()
@@ -77,8 +78,20 @@ class SettingsDialog(Ui_SettingsDialog, QDialog):
         new_layout.addWidget(background_label, 0, 2)
         new_layout.addWidget(background_button, 1, 2)
 
+        button_box = QDialogButtonBox()
+        button_box.setStandardButtons(
+            QDialogButtonBox.Cancel | QDialogButtonBox.Apply | QDialogButtonBox.RestoreDefaults
+        )
+
+        for button in button_box.buttons():
+            button.setIcon(QIcon())
+
+        new_layout.addWidget(button_box, 2, 0, 1, 3)
+
+
         new_dialog.exec()
 
-        self.db.set_param("primary_color", primary_button.color.name())
+        """self.db.set_param("primary_color", primary_button.color.name())
         self.db.set_param("secondary_color", secondary_button.color.name())
         self.db.set_param("background_color", background_button.color.name())
+"""

@@ -8,7 +8,7 @@ from PySide6.QtCore import QSize
 from PySide6.QtGui import QFont, QFontDatabase, QPixmap, QIcon, QImage
 import sass
 
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QStyle, QStyleFactory
 
 from interfaces.raw.main_window import Ui_MainWindow
 from interfaces.chats_controller import ChatsController
@@ -37,7 +37,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.db = ClientDb()
         self.db.create_db()
 
-        self.set_style_theme()
+        self.set_color_theme()
 
         self.ChatsController = ChatsController(self.ContactsContent)
         self.MessageController = MessageController(self.db, self.ChatsController, self.MessageAreaContentLayout)

@@ -143,8 +143,10 @@ QMainWindow{
         QLabel{
             color: $invert_background_color;
         }
-        QPushButton#submenu{
+        QPushButton{
             background-color: $secondary_color;
+            color: $background_color;
+
             border: none;
             border-radius: 10px;
             padding: 10px;

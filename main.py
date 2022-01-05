@@ -37,16 +37,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.db = ClientDb()
         self.db.create_db()
 
-        primary_color = pri_col_db if (pri_col_db := self.db.get_param("primary_color")) else "#00ff00"
-        secondary_color = sec_col_db if (sec_col_db := self.db.get_param("secondary_color")) else "#fde910"
-        background_color = back_col_db if (back_col_db := self.db.get_param("background_color")) else "#161616"
-
-        self.db.set_param("primary_color", primary_color)
-        self.db.set_param("secondary_color", secondary_color)
-        self.db.set_param("background_color", background_color)
-
-        self.set_color_theme(primary_color, secondary_color, background_color)
-
+        self.set_style_theme()
 
         self.ChatsController = ChatsController(self.ContactsContent)
         self.MessageController = MessageController(self.db, self.ChatsController, self.MessageAreaContentLayout)
@@ -80,9 +71,11 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         for font in fonts_list:
             QFontDatabase.addApplicationFont(str(Path.cwd() / "fonts" / font))
 
-    def set_color_theme(self, primary_color: str = None,
-                        secondary_color: str = None,
-                        background_color: str = None):
+    def set_style_theme(self):
+        DEFAULT_PRIMARY_COLOR = "#00ff00"
+        DEFAULT_SECONDARY_COLOR = "#fde910"
+        DEFAULT_BACKGROUND_COLOR = "#161616"
+
         self.app.setStyle("fusion")
         self.app.setFont(QFont("Roboto", 10))
 
@@ -90,32 +83,38 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             "./icons/menu-line.png"
         ))
 
+        if pri_param := self.db.get_param("primary_color"):
+            primary_color = pri_param
+        else:
+            self.db.set_param("primary_color", DEFAULT_PRIMARY_COLOR)
+            primary_color = DEFAULT_PRIMARY_COLOR
+
+        if sec_param := self.db.get_param("secondary_color"):
+            secondary_color = sec_param
+        else:
+            self.db.set_param("secondary_color", DEFAULT_SECONDARY_COLOR)
+            secondary_color = DEFAULT_SECONDARY_COLOR
+
+        if back_param := self.db.get_param("background_color"):
+            background_color = back_param
+        else:
+            self.db.set_param("background_color", DEFAULT_BACKGROUND_COLOR)
+            background_color = DEFAULT_BACKGROUND_COLOR
+
         file = open(path.join("scss", "styles.scss"), "r")
         text_css = file.read()
         file.close()
-        custom_theme = False
-
-        if primary_color:
-            text_css = text_css.replace("#00ff00", primary_color)
-            custom_theme = True
-
-        if secondary_color:
-            text_css = text_css.replace("#fde910", secondary_color)
-            custom_theme = True
-
-        if background_color:
-            text_css = text_css.replace("#161616", background_color)
-            custom_theme = True
+        
+        text_css = text_css.replace(DEFAULT_PRIMARY_COLOR, primary_color)
+        text_css = text_css.replace(DEFAULT_SECONDARY_COLOR, secondary_color)
+        text_css = text_css.replace(DEFAULT_BACKGROUND_COLOR, background_color)
 
         text_css = sass.compile(string=text_css)
         self.setStyleSheet(text_css)
 
-        if custom_theme:
-            logger.info("set custom color theme")
-            logger.info(f"primary color: {primary_color}")
-            logger.info(f"secondary color: {secondary_color}")
-            logger.info(f"background color: {background_color}")
-        else:
-            logger.info("set standart color theme")
+        logger.info("set color theme")
+        logger.info(f"primary color: {primary_color}")
+        logger.info(f"secondary color: {secondary_color}")
+        logger.info(f"background color: {background_color}")
 
         return text_css

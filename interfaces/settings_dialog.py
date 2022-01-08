@@ -26,6 +26,7 @@ class SettingsDialog(Ui_SettingsDialog, QDialog):
         self.setWindowTitle("Settings")
 
         self.db = db
+        self.main_window = parent
 
         SettingListItem = namedtuple("SettingsListItem", "name type method")
         self.SETTINGS_LIST = [
@@ -52,6 +53,12 @@ class SettingsDialog(Ui_SettingsDialog, QDialog):
             self.SettingsAreaLayout.addWidget(new_widget)
 
     def setting_color_theme(self):
+        def save_colors():
+            self.db.set_param("primary_color", primary_button.color.name())
+            self.db.set_param("secondary_color", secondary_button.color.name())
+            self.db.set_param("background_color", background_button.color.name())
+            self.main_window.set_color_theme()
+
         new_dialog = QDialog()
         new_dialog.setWindowTitle("Change Color Theme")
         new_dialog.resize(300, 130)
@@ -80,18 +87,15 @@ class SettingsDialog(Ui_SettingsDialog, QDialog):
 
         button_box = QDialogButtonBox()
         button_box.setStandardButtons(
-            QDialogButtonBox.Cancel | QDialogButtonBox.Apply | QDialogButtonBox.RestoreDefaults
+            QDialogButtonBox.Ok | QDialogButtonBox.Cancel
         )
 
         for button in button_box.buttons():
             button.setIcon(QIcon())
 
+        button_box.accepted.connect(save_colors)
+
         new_layout.addWidget(button_box, 2, 0, 1, 3)
 
 
         new_dialog.exec()
-
-        """self.db.set_param("primary_color", primary_button.color.name())
-        self.db.set_param("secondary_color", secondary_button.color.name())
-        self.db.set_param("background_color", background_button.color.name())
-"""

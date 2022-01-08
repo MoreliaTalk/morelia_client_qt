@@ -58,6 +58,14 @@ class SettingsDialog(Ui_SettingsDialog, QDialog):
             self.db.set_param("secondary_color", secondary_button.color.name())
             self.db.set_param("background_color", background_button.color.name())
             self.main_window.set_color_theme()
+            new_dialog.accept()
+
+        def restore_default_color():
+            self.db.set_param("primary_color", "#00ff00")
+            self.db.set_param("secondary_color", "#fde910")
+            self.db.set_param("background_color", "#161616")
+            self.main_window.set_color_theme()
+            new_dialog.accept()
 
         new_dialog = QDialog()
         new_dialog.setWindowTitle("Change Color Theme")
@@ -87,13 +95,15 @@ class SettingsDialog(Ui_SettingsDialog, QDialog):
 
         button_box = QDialogButtonBox()
         button_box.setStandardButtons(
-            QDialogButtonBox.Ok | QDialogButtonBox.Cancel
+            QDialogButtonBox.Ok | QDialogButtonBox.Cancel | QDialogButtonBox.RestoreDefaults
         )
 
         for button in button_box.buttons():
             button.setIcon(QIcon())
 
         button_box.accepted.connect(save_colors)
+        button_box.rejected.connect(new_dialog.reject)
+        button_box.button(QDialogButtonBox.RestoreDefaults).clicked.connect(restore_default_color)
 
         new_layout.addWidget(button_box, 2, 0, 1, 3)
 

@@ -19,6 +19,7 @@ from loguru import logger
 from interfaces.settings_dialog import SettingsDialog
 from modules.logging import set_logger_setting
 from modules.database.clientdb import ClientDb
+from scss import default_colors
 
 set_logger_setting()
 
@@ -71,10 +72,6 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             QFontDatabase.addApplicationFont(str(Path.cwd() / "fonts" / font))
 
     def set_color_theme(self):
-        DEFAULT_PRIMARY_COLOR = "#00ff00"
-        DEFAULT_SECONDARY_COLOR = "#fde910"
-        DEFAULT_BACKGROUND_COLOR = "#161616"
-
         self.app.setStyle("fusion")
         self.app.setFont(QFont("Roboto", 10))
 
@@ -87,19 +84,19 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         file.close()
 
         if primary_color := self.db.get_param("primary_color"):
-            text_css = text_css.replace(DEFAULT_PRIMARY_COLOR, primary_color)
+            text_css = text_css.replace(default_colors.PRIMARY_COLOR, primary_color)
         else:
-            self.db.set_param("primary_color", DEFAULT_PRIMARY_COLOR)
+            self.db.set_param("primary_color", default_colors.PRIMARY_COLOR)
 
         if secondary_color := self.db.get_param("secondary_color"):
-            text_css = text_css.replace(DEFAULT_SECONDARY_COLOR, secondary_color)
+            text_css = text_css.replace(default_colors.SECONDARY_COLOR, secondary_color)
         else:
-            self.db.set_param("secondary_color", DEFAULT_SECONDARY_COLOR)
+            self.db.set_param("secondary_color", default_colors.SECONDARY_COLOR)
 
         if background_color := self.db.get_param("background_color"):
-            text_css = text_css.replace(DEFAULT_BACKGROUND_COLOR, background_color)
+            text_css = text_css.replace(default_colors.BACKGROUND_COLOR, background_color)
         else:
-            self.db.set_param("background_color", DEFAULT_BACKGROUND_COLOR)
+            self.db.set_param("background_color", default_colors.BACKGROUND_COLOR)
 
         text_css = sass.compile(string=text_css)
         self.setStyleSheet(text_css)

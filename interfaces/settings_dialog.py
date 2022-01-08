@@ -8,6 +8,7 @@ from NekrodWidgets import ColorSelectButton
 from interfaces.raw.setting_card import Ui_SettingCard
 from interfaces.raw.settings_dialog import Ui_SettingsDialog
 from modules.database.clientdb import ClientDb
+from scss import default_colors
 
 
 class SettingItem(Ui_SettingCard, QWidget):
@@ -61,9 +62,9 @@ class SettingsDialog(Ui_SettingsDialog, QDialog):
             new_dialog.accept()
 
         def restore_default_color():
-            self.db.set_param("primary_color", "#00ff00")
-            self.db.set_param("secondary_color", "#fde910")
-            self.db.set_param("background_color", "#161616")
+            self.db.set_param("primary_color", default_colors.PRIMARY_COLOR)
+            self.db.set_param("secondary_color", default_colors.SECONDARY_COLOR)
+            self.db.set_param("background_color", default_colors.BACKGROUND_COLOR)
             self.main_window.set_color_theme()
             new_dialog.accept()
 

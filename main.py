@@ -2,13 +2,10 @@ import os
 from os import path
 from pathlib import Path
 
-from PIL.ImageQt import ImageQt
-from PIL import Image
-from PySide6.QtCore import QSize
-from PySide6.QtGui import QFont, QFontDatabase, QPixmap, QIcon, QImage
+from PySide6.QtGui import QFont, QFontDatabase, QIcon
 import sass
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QStyle, QStyleFactory
+from PySide6.QtWidgets import QApplication, QMainWindow
 
 from interfaces.raw.main_window import Ui_MainWindow
 from interfaces.chats_controller import ChatsController
@@ -19,7 +16,7 @@ from loguru import logger
 from interfaces.settings_dialog import SettingsDialog
 from modules.logging import set_logger_setting
 from modules.database.clientdb import ClientDb
-from scss import default_colors
+from modules import default_colors
 
 set_logger_setting()
 

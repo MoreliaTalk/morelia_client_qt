@@ -8,7 +8,7 @@ from NekrodWidgets import ColorSelectButton
 from interfaces.raw.setting_card import Ui_SettingCard
 from interfaces.raw.settings_dialog import Ui_SettingsDialog
 from modules.database.clientdb import ClientDb
-from scss import default_colors
+from modules import default_colors
 
 
 class SettingItem(Ui_SettingCard, QWidget):

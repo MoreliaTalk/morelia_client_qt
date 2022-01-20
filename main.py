@@ -1,6 +1,8 @@
+import os
 from os import path
 from pathlib import Path
-from PySide6.QtGui import QFont, QFontDatabase
+
+from PySide6.QtGui import QFont, QFontDatabase, QIcon
 import sass
 
 from PySide6.QtWidgets import QApplication, QMainWindow
@@ -10,8 +12,11 @@ from interfaces.chats_controller import ChatsController
 from interfaces.message_controller import MessageController
 
 from loguru import logger
+
+from interfaces.settings_dialog import SettingsDialog
 from modules.logging import set_logger_setting
 from modules.database.clientdb import ClientDb
+from modules import default_colors
 
 set_logger_setting()
 
@@ -26,10 +31,11 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.setupUi(self)
         self.setWindowTitle("MoreliaTalk")
         self.load_font()
-        self.set_color_theme()
 
         self.db = ClientDb()
         self.db.create_db()
+
+        self.set_color_theme()
 
         self.ChatsController = ChatsController(self.ContactsContent)
         self.MessageController = MessageController(self.db, self.ChatsController, self.MessageAreaContentLayout)
@@ -38,6 +44,13 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.ChatsController.signals.selected_chat.connect(
             lambda chat: self.MessageController.load_messages_current_chat(chat.uuid)
         )
+
+        self.SettingsDialog = SettingsDialog(
+            parent=self,
+            db=self.db
+        )
+
+        self.MenuButton.clicked.connect(self.SettingsDialog.exec)
 
     def load_flow_and_mes(self):
         list_flow = self.db.list_flow()
@@ -51,58 +64,39 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
     @staticmethod
     def load_font():
-        fonts_dict = {
-            "Roboto": (
-                "Black",
-                "BlackItalic",
-                "Bold",
-                "BoldItalic",
-                "Italic",
-                "Light",
-                "LightItalic",
-                "Medium",
-                "Regular",
-                "Thin",
-                "ThinItalic"
-            )
-        }
-        for font_family in fonts_dict:
-            for font in font_family:
-                QFontDatabase.addApplicationFont(str(Path.cwd() / "fonts" / f"{font}.ttf"))
+        fonts_list = tuple(os.walk(Path.cwd() / "fonts"))[0][-1]
+        for font in fonts_list:
+            QFontDatabase.addApplicationFont(str(Path.cwd() / "fonts" / font))
 
-    def set_color_theme(self, primary_color: str = None,
-                        secondary_color: str = None,
-                        background_color: str = None):
+    def set_color_theme(self):
         self.app.setStyle("fusion")
         self.app.setFont(QFont("Roboto", 10))
+
+        self.MenuButton.setIcon(QIcon(
+            "./icons/menu-line.png"
+        ))
 
         file = open(path.join("scss", "styles.scss"), "r")
         text_css = file.read()
         file.close()
 
-        custom_theme = False
+        if primary_color := self.db.get_param("primary_color"):
+            text_css = text_css.replace(default_colors.PRIMARY_COLOR, primary_color)
+        else:
+            self.db.set_param("primary_color", default_colors.PRIMARY_COLOR)
 
-        if primary_color:
-            text_css = text_css.replace("#00ff00", primary_color)
-            custom_theme = True
+        if secondary_color := self.db.get_param("secondary_color"):
+            text_css = text_css.replace(default_colors.SECONDARY_COLOR, secondary_color)
+        else:
+            self.db.set_param("secondary_color", default_colors.SECONDARY_COLOR)
 
-        if secondary_color:
-            text_css = text_css.replace("#fde910", secondary_color)
-            custom_theme = True
-
-        if background_color:
-            text_css = text_css.replace("#161616", background_color)
-            custom_theme = True
+        if background_color := self.db.get_param("background_color"):
+            text_css = text_css.replace(default_colors.BACKGROUND_COLOR, background_color)
+        else:
+            self.db.set_param("background_color", default_colors.BACKGROUND_COLOR)
 
         text_css = sass.compile(string=text_css)
         self.setStyleSheet(text_css)
-
-        if custom_theme:
-            logger.info("set custom color theme")
-            logger.info(f"primary color: {primary_color}")
-            logger.info(f"secondary color: {secondary_color}")
-            logger.info(f"background color: {background_color}")
-        else:
-            logger.info("set standart color theme")
+        logger.info("set color theme")
 
         return text_css

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "24ec7024b5b8ab6fd3d3ea3e6736beeb99cfd0391a9604980c1b2b352367eeb5"
+            "sha256": "c36d01e36a0986120c5e22b1bf43dacbcb4fd81a22f1770087bc8aac1f034ac6"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -54,6 +54,12 @@
             ],
             "version": "==3.3"
         },
+        "importlib": {
+            "hashes": [
+                "sha256:b6ee7066fea66e35f8d0acee24d98006de1a0a8a94a8ce6efe73a9a23c8d9826"
+            ],
+            "version": "==1.0.4"
+        },
         "libsass": {
             "hashes": [
                 "sha256:06c8776417fe930714bdc930a3d7e795ae3d72be6ac883ff72a1b8f7c49e5ffb",
@@ -77,6 +83,14 @@
             ],
             "index": "pypi",
             "version": "==0.5.3"
+        },
+        "nekrodwidgets": {
+            "hashes": [
+                "sha256:877101c19bcb6a68274161ff3df25af80f52522f3e4776ee56f4e53c64cf8131",
+                "sha256:87db01fb86240eecfb4891abca339bbfb26666a1c6034740491c5c6d61682604"
+            ],
+            "index": "pypi",
+            "version": "==0.0.3.4"
         },
         "pillow": {
             "hashes": [

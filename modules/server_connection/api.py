@@ -1,4 +1,3 @@
-import json
 from typing import Any
 from typing import Optional
 from typing import List
@@ -9,11 +8,10 @@ from pydantic import EmailStr
 # Version of MoreliaTalk Protocol
 VERSION: str = '1.0'
 
+# A description of the basic validation scheme for requests and responses.
 
-class Flow(BaseModel):
-    class Config:
-        title = 'List of flow with description and type'
-    uuid: Optional[str] = None
+
+class BaseFlow(BaseModel):
     time: Optional[int] = None
     type: Optional[str] = None
     title: Optional[str] = None
@@ -24,25 +22,20 @@ class Flow(BaseModel):
     message_end: Optional[int] = None
 
 
-class User(BaseModel):
-    class Config:
-        title = 'List of user information'
+class BaseUser(BaseModel):
     uuid: Optional[str] = None
+    login: Optional[str] = None
+    username: Optional[str] = None
     bio: Optional[str] = None
     avatar: Optional[bytes] = None
     password: Optional[str] = None
-    login: Optional[str] = None
     is_bot: Optional[bool] = None
     auth_id: Optional[str] = None
     email: Optional[EmailStr] = None
-    username: Optional[str] = None
 
 
-class Message(BaseModel):
-    class Config:
-        title = 'List of message information'
-    uuid: Optional[str] = None
-    client_id: Optional[int] = None
+class BaseMessage(BaseModel):
+    uuid: str
     text: Optional[str] = None
     from_user: Optional[str] = None
     time: Optional[int] = None
@@ -56,45 +49,120 @@ class Message(BaseModel):
     edited_status: Optional[bool] = None
 
 
-class Data(BaseModel):
-    class Config:
-        title = 'Main data-object'
+class BaseData(BaseModel):
     time: Optional[int] = None
-    flow: Optional[List[Flow]] = None
-    message: Optional[List[Message]] = None
-    user: Optional[List[User]] = None
+    user: Optional[List[BaseUser]] = None
     meta: Optional[Any] = None
 
 
-class Errors(BaseModel):
-    class Config:
-        title = 'Error information and statuses of request processing'
-    code: Optional[int] = None
-    status: Optional[str] = None
-    time: Optional[int] = None
+class BaseErrors(BaseModel):
     detail: Optional[str] = None
 
 
-class Version(BaseModel):
-    class Config:
-        title = 'Protocol version'
-    version: Optional[str] = None
+class BaseVersion(BaseModel):
+    version: str
 
 
-class ValidJSON(BaseModel):
-    class Config:
-        title = 'MoreliaTalk protocol v1.0'
-    type: Optional[str] = None
-    data: Optional[Data] = None
-    errors: Optional[Errors] = None
-    jsonapi: Optional[Version] = None
+class BaseValidator(BaseModel):
+    type: str
+    jsonapi: BaseVersion
     meta: Optional[Any] = None
 
-    def toJSON(self):
-        return json.dumps(self,
-                          ensure_ascii=False,
-                          default=lambda o: o.__dict__)
+
+# Description of the request validation scheme
 
 
-if __name__ == "__main__":
-    print('Shema=', ValidJSON.schema_json(indent=2))
+class FlowRequest(BaseFlow):
+    class Config:
+        title = 'List of flow with UUID is str or None'
+    uuid: str = None
+
+
+class UserRequest(BaseUser):
+    class Config:
+        title = 'List of user information'
+    pass
+
+
+class MessageRequest(BaseMessage):
+    class Config:
+        title = 'List of message information with client_id is int'
+    client_id: int
+
+
+class DataRequest(BaseData):
+    class Config:
+        title = 'Main data-object'
+    flow: Optional[List[FlowRequest]] = None
+    message: Optional[List[MessageRequest]] = None
+
+
+class ErrorsRequest(BaseErrors):
+    class Config:
+        title = 'Error information'
+    code: int = None
+    status: str = None
+    time: int = None
+
+
+class VersionRequest(BaseVersion):
+    class Config:
+        title = 'Protocol version'
+    pass
+
+
+class Request(BaseValidator):
+    class Config:
+        title = 'MoreliaTalk protocol (for request)'
+    data: Optional[DataRequest] = None
+    errors: ErrorsRequest = None
+
+
+# Description of the response validation scheme
+
+
+class FlowResponse(BaseFlow):
+    class Config:
+        title = 'List of flow with required UUID and it is str'
+    uuid: str
+
+
+class UserResponse(BaseUser):
+    class Config:
+        title = 'List of user information'
+    pass
+
+
+class MessageResponse(BaseMessage):
+    class Config:
+        title = 'List of message information without client_id'
+    client_id: int = None
+
+
+class DataResponse(BaseData):
+    class Config:
+        title = 'Main data-object'
+    flow: Optional[List[FlowResponse]] = None
+    message: Optional[List[MessageResponse]] = None
+
+
+class ErrorsResponse(BaseErrors):
+    class Config:
+        title = 'Error information. Code, status. time is required'
+    code: int
+    status: str
+    time: int
+
+
+class VersionResponse(BaseVersion):
+    class Config:
+        title = 'Protocol version'
+    pass
+
+
+class Response(BaseValidator):
+    class Config:
+        title = 'MoreliaTalk protocol (for response)'
+        use_enum_values = False
+    data: Optional[DataResponse] = None
+    errors: ErrorsResponse = None
